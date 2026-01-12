@@ -1,0 +1,60 @@
+/* CSS Document */
+
+body {
+	font-family: Verdana, Geneva, sans-serif;
+	line-height:1.3;
+	background: #fff;
+	width:100%;
+    margin:0 auto;
+	}
+
+h1 {
+	font-size: 50px;
+	text-align: center;
+}	
+
+#container_lab{
+	width:100%;
+	margin: 0 auto;
+
+}
+
+.labs{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	background:#2c3e50;
+	
+	border-bottom: 5px #e67e22 solid;
+}
+
+.labs li{
+	display: inline-block;
+	margin:0;
+	padding: 10px 20px 5px 20px;
+	cursor: pointer;
+		
+	font-size:1.2em;
+	line-height:2em;
+	color:#FFF;
+}
+
+.labs li:hover {
+	background:#d35400;
+	}
+
+.labs li.current{
+	background: #e67e22;
+	color: #FFF;
+}
+
+.lab-content{
+	display: none;
+	/*background: #ededed;*/
+	padding-left:0px;
+	line-height:1.4;
+}
+
+.lab-content.current{
+	display: inherit;
+}
