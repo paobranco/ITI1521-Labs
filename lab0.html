@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr" class="no-js">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+    <title>ITI1521 Laboratoire 0</title>
+    <meta name="description" content="ITI1521 labs"/>
+    <meta name="keywords" content="fullscreen pageflip, booklet, layout, bookblock, jquery plugin, flipboard layout, sidebar menu"/>
+    <!-- <link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.custom.css" /> -->
+    <link rel="stylesheet" type="text/css" href="css/bookblock.css"/>
+    <link rel="stylesheet" type="text/css" href="css/custom.css" />
+    <script type="text/javascript" src="js/modernizr.custom.79639.js"></script>
+    <script type="text/javascript" src="js/google-code-prettify/src/run_prettify.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/prettify.css"/>
+
+  </head>
+  <body>
+    <div id="container" class="container">	
+
+      <div class="menu-panel">
+	<h3>Table des matières</h3>
+	<ul id="menu-toc" class="menu-toc">
+	  <li class="menu-toc-current"><a href="#item1">Partie 1</a></li>
+	  <!--<li><a href="#item2">Partie 2</a></li>
+	  <li><a href="#item3">Troisième partie </a></li>
+	  <li><a href="#item4">A drawing joke</a></li>
+	  <li><a href="#item5">Commencing practice</a></li>-->
+	</ul>
+	<!--<div>
+	  <a href="">some link here</a>
+	  
+	</div>-->
+      </div>
+
+      <div class="bb-custom-wrapper">
+	<div id="bb-bookblock" class="bb-bookblock">
+	  <div class="bb-item" id="item1">
+	    <div class="content">
+	      <div class="scroller"> <h1>Première partie</h1> 
+
+		<h2>Édition, compilation et exécution</h2> 
+
+		<div class="content_bullet_box objectifs_box">
+
+		  <h3>Objectifs d'apprentissage</h3>
+
+		  <ul>
+		    <li><strong>Rappeler </strong>les exigences du cours par rapport à la soumission des devoirs.</li>
+		    <li><strong>Découvrir</strong> les divers outils liés au développement de programmes Java.</li>
+		    <li><strong>Éditer, compiler</strong> et <strong>exécuter </strong>un programme Java.</li>
+		  </ul>
+		</div>
+
+		<h4>1. Revue des directives pour l’écriture de programmes Java</h4>
+		<p>Prenez quelques minutes afin de revoir les règles concernant l'écriture de programmes Java. Consultez ces  règles pour tous vos travaux pratiques. Jusqu'à 10% de la note des devoirs dépend du respect de ces règles et  de la clarté du code. </p>
+		<ul>
+		  <li><a href="http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html" target="_blank">java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html</a>. </li>
+		  <li><a href="http://www.site.uottawa.ca/%7Eturcotte/teaching/iti-1521/assignments/directives.html" target="_blank">www.site.uottawa.ca/~turcotte/teaching/iti-1521/assignments/directives.html</a></li>
+		</ul>
+		<h4>Installation de « Java Development Kit »</h4>
+
+		<p>Si vous utilisez un ordinateur personnel et que vous n’avez pas encore le JDK, vous allez devoir l’installer. </p>
+
+		<h5>Pour Windows:</h5>
+		<p></p>
+		<p>Pour vérifier si le JDK est présent, ouvrez une fenêtre de la ligne de commande (recherchez « Command Prompt » ou « cmd » dans votre « menu démarrer ») et insérez la ligne suivante : </p>
+		<pre class="prettyprint sh"><code>
+for %i in (javac.exe) do @echo %~$PATH:i
+		</code></pre>
+		<p> Si vous avez déjà installé le JDK cela devrait vous retourner le chemin de dossier menant au fichier javac.exe, similaire a ceci :</p>
+		<pre class="prettyprint sh"><code>
+for %i in (javac.exe) do @echo %~$PATH:i
+C:\Program Files\Java\jdk1.13.0_111\bin\javac.exe
+		</code></pre>
+		
+		<p>Si vous n'obtenez pas le résultat voulu, allez sur le site d'<a href="https://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">Oracle</a>, sélectionnez le « Java SE Development Kit » le plus récent pour votre système d’exploitation et installez-le.
+		  <strong>Notez la destination de l’installation.</strong> Une fois terminé, naviguez jusqu’au fichier d’installation, puis dans le dossier bin. Copier le chemin des dossiers (similaire a « C:\Program Files\Java\jdk1.13.0_111\bin »).</p>
+
+		<p>Il faut maintenant ajouter une variable locale.</p>
+		<ol start="1">
+		  <li>Dans le « start menu », recherchez « Computer » ou « this PC », appuyez sur le bouton de droite et choisissez « Properties ».</li>
+		  <li>Sélectionnez « Advance system settings ».</li>
+		  <li>Sélectionnez  « Environment Variables... ».</li>
+		  <li>Cliquez sur  « New... ».</li>
+		  <li>Sur la ligne « Variable name », entrez « PATH ». Sur la ligne « Variable value », insérez le chemin de dossier que vous avez copié plus tôt.</li>
+		  <li>Cliquez sur  « OK ».</li>
+		  <li>Vérifiez à nouveau si votre JDK est bien installé par la méthode de  la ligne de commande décrite précédemment.</li>
+		</ol>
+
+		<div id="img1">
+		  <a href="images/lab1_environment_variables.png"><img id="figure_1"
+								       src="images/lab1_environment_variables.png"
+								       alt="Étapes d'ajout des variables d'environnement sous windows 10" title="Étapes d'ajout des variables d'environnement sous windows 10."/></a>
+
+		  <strong>Figure 1 : </strong>Étapes d'ajout des variables d'environnement sous windows 10.</div>
+
+		<p>La vidéo ci-dessous résume le processus décrit dans cette section.</p>
+		
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/ylpgVCoUK4k" allowfullscreen></iframe>
+
+		<h6>Résolution de problèmes communs</h6>
+		<p><b>J’ai déjà une variable PATH, que faire?</b></p>
+		<p>C’est normal que vous ayez déjà une variable PATH, cliquez sur « edit » et ajoutez le chemin du dossier à la fin de la variable. Assurez-vous que ce soit séparé du reste de la variable par un point-virgule ( ;)</p>
+
+		<p><b>Je reçois le message « ECHO is on » plutôt que le chemin vers le JDK</b></p>
+		<p>La commande « echo » retourne par défaut « ECHO is on », donc cela indique probablement que vous n’avez pas le JDK d’installé ou que la variable locale n’a pas bien été créée.</p>
+
+		<p><b>Trucs généraux :</b></p>
+		<ul>
+		  <li>Assurez-vous que le chemin de dossier dans la variable PATH mène au JDK et non au JRE</li>
+		  <li>Assurez-vous d’avoir une seule version du JDK</li>
+		  <li>Assurez-vous de commencer une nouvelle instance de la ligne de commande après avoir installé le JDK et la variable locale</li>
+		  <li>Assurez-vous que la variable locale PATH ne contient qu’une seule référence au JDK</li>
+		</ul>
+
+		<h6>Ressources</h6>
+		<ul>
+		  <li><a href="https://docs.oracle.com/en/java/javase/13/install/installation-jdk-microsoft-windows-platforms.html"><em>JDK Installation for Microsoft Windows</em></a></li>
+		</ul>
+
+		<h5>Pour Mac OS</h5>
+		<p>Pour vérifier si le JDK est présent, ouvrez le terminal  (Applications -> Utilities) et insérez la ligne suivante : </p>
+		<pre class="prettyprint sh"><code>
+which javac
+		</code></pre>
+		
+		<p>Si le JDK est installé proprement vous devriez voir un chemin similaire à ceci :</p>
+		
+		<pre class="prettyprint sh"><code>
+/usr/bin/javac
+		</code></pre>
+		<p>Si vous n'obtenez pas le résultat voulu, allez sur le site de <a href="https://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">Oracle</a>, sélectionnez le « Java SE Development Kit » le plus récent pour votre système d’exploitation et installez-le.</p> 
+		<p>Vérifiez à nouveau si votre JDK est bien installé par la méthode du terminal décrite précédemment.</p>
+
+		<h6>Ressources</h6>
+		<ul>
+		  <li><a href="https://docs.oracle.com/en/java/javase/13/install/installation-jdk-macos.html"><em>JDK 13 Installation for OS X</em></a></li>
+		</ul>
+		
+		<h4>3. Éditeur de code source</h4>
+
+		<p>Vous devez faire la distinction entre les concepts suivants : compilateur, éditeur de code source et  machine virtuelle (Java Virtual Machine — JVM). Les environnements de développement tels qu'Eclipse et  Netbeans regroupent ces éléments à l'aide d'une interface commune (IDE – «Integrated Development  Environment»). Ceci facilite le développement de programmes informatiques, mais masque les frontières entre  ces concepts. </p>
+		<p> Un éditeur de code source (éditeur de programme) est un éditeur de texte conçu expressément  pour éditer le code source des programmes — voir <a href="#figure_2">Figure 2</a>. Ces logiciels ont généralement les  caractéristiques suivantes : </p>
+		<ul>
+		  <li>Mise en évidence («highlighting») de la syntaxe du langage. Spécifiquement, les éléments du langage tels que les mots réservés (clés), les paramètres et les chaînes de caractères sont affichés à l'aide de polices et de couleurs distinctes. Ceci facilite la lecture du code et son débogage. Par exemple, si l'on oublie le délimiteur de droite d'une chaîne de caractères, tout le texte qui suit sera affiché de la même couleur que la chaîne (essayez-le). </li>
+		  <li>Indentation du code source. L'éditeur de code source comprend un ensemble de règles afin de formater le texte. Ceci facilite la lecture du code et son débogage. Par exemple, l'on omet les parenthèses englobant les énoncés de la clause else, seul le premier énoncé sera indenté vers la droite. </li>
+		  <li>Correspondance des accolades (,(),[]). Lorsqu'on positionne le curseur sur une accolade, l'éditeur met en évidence l'accolade correspondante, ce qui encore une fois facile la lecture du code. </li>
+		  <li>Auto-complétion des mots clés du langage.</li>
+		</ul>
+
+		<div id="img2">
+		  <img id="figure_2" src="images/lab1_img1_selection_sort-notepad.png" alt="Édition d’un programme de tri par sélection à l’aide de l’éditeur de code source Notepad++ sous Windows." title="Édition d’un programme de tri par sélection à l’aide de l’éditeur de code source Notepad++ sous Windows."/>
+		  <strong>Figure 2 : </strong>Édition d’un programme de tri par sélection à l’aide de l’éditeur de code source Notepad++ sous Windows. 
+		</div>
+
+		<p>Voici quelques éditeurs de code source populaires. </p>
+		<ul >
+                  <li>Atom (Mac OS, Windows, Linux, <a href="https://atom.io", target="_blank">atom.io</a>)</li>
+		  <li>Sublime Text (Mac OS, Windows, Linux, <a href="https://www.sublimetext.com" target="_blank">www.sublimetext.com</a>) </li>
+		  <li>Notepad++ (Windows, <a href="https://notepad-plus-plus.org" target="_blank">notepad-plus-plus.org</a>) </li>
+		</ul>
+		<p>Utilisez votre éditeur de code source favori afin de créer un simple programme « Hello World »  (Notepad++ est recommandé). Un programme « Hello World » possède une méthode principale et celle-ci  affiche la chaîne de caractères « Hello World ! ». Vous nommerez cette classe <strong>HelloWorld</strong>. Copier le code  source de suivant dans votre éditeur de code source et sauvegarder le contenu dans un fichier sous le nom  <strong>HelloWorld.java</strong>. Enregistrer le fichier dans un dossier nommer « Lab0 » sur votre bureau (desktop). </p>
+		<pre class="prettyprint lang-java"><code>
+1 public class HelloWorld {
+2 	public static void main(String[] args) { 
+3 		System.out.println("Hello World!"); 
+4 	} 
+5 }</code>
+		</pre>
+		<p>Explication du code ligne par ligne:</p>
+		<ol>
+		  <li>Déclaration de la classe avec le nom « HelloWorld » en utilisant le mot clé <strong>class</strong>. Le mot clé <strong>public</strong> indique qu’il n’y a pas de restriction sur l’accès de la classe.</li>
+		  <li>Déclaration de la méthode principale <strong>main</strong>.  Cette méthode est spéciale: elle est le point de départ de l’application. En paramètre, c’est-à-dire entre parenthèses, la méthode reçoit un tableau de <strong>String</strong> qui est nommé « args » par convention. La méthode <strong>main</strong> doit toujours avoir cette signature.</li>
+		  <li>Utilisation de la classe <strong>System</strong> de la libraire java. La classe System contient la variable « out » qui représente là où seront écrites les sorties du programme. Nous utilisons la méthode println qui permet d’imprimer sur une nouvelle ligne tout <strong>String</strong> qu’elle reçoit en paramètre, soit « Hello World! » dans l'exemple ci-haut.</li>
+		  <li>Fermeture de la méthode <strong>main</strong>.</li>
+		  <li>Fermeture de la classe <strong>HelloWorld</strong>.</li>
+		</ol>
+		<h4>4. Compilation et exécution à partir d'un «shell» de commandes</h4>
+		<p>Ouvrer une fenêtre de commande (command prompt) (ou le terminal pour Mac). Utiliser la commande <b>dir</b> pour afficher les fichiers et dossiers contenus dans le dossier courant. Utiliser <b>cd</b> pour changer de dossier. Voici un exemple de la procédure, les commandes sont précéder du signe <b>></b></p>
+		<pre class="prettyprint sh"><code> 
+Directory of C:\Users\Admin
+
+01/02/2017  10:31 PM    &gt;DIR>          .
+01/02/2017  10:31 PM    &gt;DIR>          ..
+01/04/2017  10:42 AM    &gt;DIR>          Desktop
+01/01/2017  08:04 PM    &gt;DIR>          Documents
+01/04/2017  09:56 AM    &gt;DIR>          Downloads
+0 File(s)              0 bytes
+3 Dir(s)  361,593,483,264 bytes free
+
+C:\Users\Admin>cd desktop
+
+C:\Users\Admin\Desktop>dir
+Directory of C:\Users\Admin\Desktop
+
+01/04/2017  10:42 AM    &gt;DIR>          .
+01/04/2017  10:42 AM    &gt;DIR>          ..
+01/04/2017  10:42 AM    &gt;DIR>          Lab0
+0 File(s)         0 bytes
+1 Dir(s)  361,593,556,992 bytes free
+
+C:\Users\Admin\Desktop>cd lab0
+
+C:\Users\Admin\Desktop\Lab0>dir
+
+Directory of C:\Users\Admin\Desktop\Lab0
+
+01/04/2017  10:53 AM    &gt;DIR>          .
+01/04/2017  10:53 AM    &gt;DIR>          ..
+01/04/2017  10:53 AM                 124 HelloWorld.java
+1 File(s)              124 bytes
+2 Dir(s)  361,592,205,312 bytes free
+		</code></pre>
+		Pour les utilisateurs de macOS qui ne sont pas
+		familiers avec les commandes du Shell, consultez ce
+		tutoriel. Vous devrez évidemment adapter les commandes
+		ci-dessus pour l'environnement macOS (OS X).
+		<ul>
+		  <li><a href="https://openclassrooms.com/courses/domptez-votre-mac-avec-mac-os-x-mavericks/le-terminal-dans-os-x">Le Terminal dans OS X</a></li>
+		</ul>
+		
+		<p> Assurez-vous que le répertoire courant soit celui qui contient le fichier 
+		  <strong>HelloWorld.java</strong>.  </p>
+		<p> Compilez le programme <strong>HelloWorld.java</strong></p>
+		
+		<pre class="prettyprint lang-java"><code>
+> javac HelloWorld.java
+		</code></pre>
+		
+		<p> Le symbole « &gt; » ne fait pas partie de la commande, c'est l'incitatif (prompt). S'il y a des erreurs,  corrigez-les, et compilez de nouveau. Lorsque vous aurez réussi à compiler le programme, vous verrez  apparaître dans le répertoire le fichier <strong>HelloWorld.class</strong>. Le fichier <strong>.class</strong> contient la représentation en  code-octet (byte-code) de votre programme. Ce sont des instructions semblables à celles de l'assembleur de  l'ordinateur TC 1101 présenté en classe. </p>
+		<p> Le code-octet est exécuté par un interprète qu'on nomme <strong>Java Virtual Machine</strong> (JVM). Afin  d'exécuter ce programme, tapez ce qui suit dans la fenêtre de commandes (assurez-vous que le répertoire  courant contient le fichier <strong>HelloWorld.class</strong>). </p>
+		
+		<pre class="prettyprint lang-java"><code>
+> java HelloWorld  
+Hello World!
+		</code></pre>
+
+		<p>Le résultat de l'énoncé println apparaît sur la sortie (à l'écran). Ici, <strong>java</strong>, c'est la machine Java virtuelle  (JVM). 
+		  La JVM lit le code-octet de votre programme, une instruction à la fois, et exécute les actions  nécessaires.</p>
+
+		<p>La vidéo ci-dessous résume le processus décrit dans cette section. Assurez-vous de bien comprendre chacune des étapes puisque vous en aurez besoin tout au long de la session.</p>
+		
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/a9LBSF3IW9s"></iframe>
+
+		<p><strong>Video 1 :</strong> Compilation et exécution d’un programme à partir de la ligne de commande.</p>
+
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/xzXYUYFWAU0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+		<p><strong>Video 2 :</strong> Compilation et exécution
+		d’un programme à partir de la ligne de commande dans
+		les laboratoires de l'Université.</p>
+		
+		<p>Afin de bien maîtriser les étapes de compilation et d'exécution, faites volontairement des erreurs dans votre code, essayez de le compiler (avec <strong>javac HelloWorld.java</strong>) et voyez-en le résultat. Nous vous suggérons notamment d'essayer de :</p>					
+
+                
+		<ul>
+		  <li>Supprimer le point-virgule après le System.out.println("Hello World!")</li>
+		  <li>Modifier le nom de la classe sans changer le nom du fichier.</li>
+		  <li>Supprimer une des accolades '}' de fermeture. </li>
+		  <li>Supprimer une des accolades '{' d'ouverture. </li>
+		  <li>Supprimer un des &quot; de l'argument de la méthode println. </li>
+		  <li>Imprimer votre âge. ;) </li>
+		</ul>					
+
+		<p>Vous remarquerez rapidement qu'un simple oubli peut causer une multitude d'erreurs. Il est ainsi fortement suggéré de compiler son code régulièrement
+		  afin d'éviter que les erreurs s'additionnent et deviennent difficiles à déboguer!</p>					
+
+		<h4>Ressources</h4>
+		
+		<ul>
+		  <li><a href="https://openclassrooms.com/courses/apprenez-a-programmer-en-java">https://openclassrooms.com/courses/apprenez-a-programmer-en-java</a></li>
+		  <li><a href="https://openclassrooms.com/courses/domptez-votre-mac-avec-mac-os-x-mavericks/le-terminal-dans-os-x">Le Terminal dans OS X</a></li>
+		  <li><a href="https://docs.oracle.com/en/java/javase/13/install/index.html"><em>Java Platform, Standard Edition Installation Guide</em></a></li>
+		</ul>
+
+	      </div> 
+	    </div>
+	  </div>
+	  
+	  <div class="bb-item" id="item2">
+	    <div class="content">
+	      <div class="scroller">
+		<h1>Deuxième partie</h1> 
+		<h2>Soumission</h2>
+
+		<h4>Il n’y a rien à soumettre pour ce laboratoire.</h4>
+
+	      </div>
+	    </div>
+	  </div>
+	  
+	  
+	</div>
+	
+	<nav>
+		<span id="bb-nav-prev">&larr;</span>
+		<span id="bb-nav-next">&rarr;</span>
+	</nav>
+
+	<span id="tblcontents" class="menu-button">Table of Contents</span>
+
+      </div>
+      
+    </div><!-- /container -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="js/jquery.mousewheel.js"></script> -->
+    <!-- <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script> -->
+    <script type="text/javascript" src="js/jquerypp.custom.js"></script>
+    <script type="text/javascript" src="js/jquery.bookblock.js"></script>
+    <script type="text/javascript" src="js/page.js"></script>
+    <script type="text/javascript">
+      $(function() {
+
+      Page.init();
+
+      });
+    </script>
+  </body>
+</html>
