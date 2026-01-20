@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="fr" class="no-js">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ITI1521 Laboratoire 6</title>
+    <meta name="description" content="ITI1521 labs" />
+    <meta name="keywords" content="fullscreen pageflip, booklet, layout, bookblock, jquery plugin, flipboard layout, sidebar menu" />
+    <!-- <link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.custom.css" /> -->
+    <link rel="stylesheet" type="text/css" href="css/bookblock.css" />
+    <link rel="stylesheet" type="text/css" href="css/custom.css" />
+    <script type="text/javascript" src="js/modernizr.custom.79639.js"></script>
+    <script type="text/javascript" src="js/google-code-prettify/src/run_prettify.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/prettify.css"/>
+
+    <script type="text/javascript">
+      <!--
+	  function toggle(id) {
+	  var e = document.getElementById(id);
+	  if(e.style.display == 'none')
+	  e.style.display = 'block';
+	  else
+	  e.style.display = 'none';
+	  }
+	  //-->
+    </script>
+
+  </head>
+	<body>
+		<div id="container" class="container">
+
+			<div class="menu-panel">
+				<h3>Table des matières</h3>
+				<ul id="menu-toc" class="menu-toc">
+					<li class="menu-toc-current"><a href="#item1">Partie 1</a></li>
+					<li><a href="#item2">Partie 2</a></li>
+					<li><a href="#item3">Partie 3</a></li>
+					<li><a href="#item4">Partie 4</a></li>
+					<!--<li><a href="#item5">Cinquième partie</a></li>-->
+				</ul>
+				<!--<div>
+					<a href="">some link here</a>
+
+				</div>-->
+			</div>
+
+			<div class="bb-custom-wrapper">
+				<div id="bb-bookblock" class="bb-bookblock">
+
+<!------------------------1st part ------------------------------------>
+
+					<div class="bb-item" id="item1">
+						<div class="content">
+							<div class="scroller"> <h1>Première partie</h1>
+
+<div class="content_bullet_box objectifs_box">
+<h3>Objectifs d'apprentissage</h3>
+
+<ul>
+ <li><strong>Reconnaître</strong> les situations où une pile est nécessaire pour la conception d'un algorithme.</li>
+ <li><strong>Décrire</strong> l'implémentation d'une pile à l'aide d'un tableau.</li>
+ <li><strong>Implémenter</strong> une pile à l'aide d'un tableau dynamique.</li>
+ <li><strong>Implémenter</strong> un type interface prédéfini.</li>
+ <li><strong>Appliquer</strong> le concept de type générique pour l'implémentation de classes et d'interfaces.</li>
+</ul>
+</div>
+<h2>Piles (Stack)</h2>
+<h3>Introduction</h3>
+<p>Les <b>piles</b> sont couramment en programmation. Dan un premier
+  temps, assurez-vous de bien comprendre leur
+  utilisation. Les <b>piles</b> respectent le protocole <b>last-in
+  first-out</b> ou <b>LIFO</b> (dernier entré premier sorti). 
+  Cette structure de données empile les éléments les uns par dessus les
+  autres. Vous n'avez accès qu'à l'élément du dessous.
+</p>
+
+<p>Voici des exemples de la vie courante. Déterminez s'il s'agit d'exemple valable (vrai) où une pile est utilisée ou non (faux).</p>
+	<div id="question11">
+		<h5> Question 1.1 : </h5>
+		<p> Les balles de tennis dans leur contenant</p>
+		<a href="#" onclick="toggle('ans11');">	Réponse</a></div>
+		<div style="display:none" id="ans11">
+		<p>Vrai</p></div>
+
+	<div id="question12">
+		<h5> Question 1.2 : </h5>
+		<p> Les étudiants sur la liste d’attente d’admission en génie</p>
+		<a href="#" onclick="toggle('ans12');">	Réponse</a></div>
+		<div style="display:none" id="ans12">
+		<p>Faux. Le premier étudiant sur la liste sera le prochain admis, non pas le dernier sur la liste!</p></div>
+
+	<div id="question13">
+		<h5> Question 1.3 : </h5>
+		<p> Une pile d’assiettes dans votre armoire</p>
+		<a href="#" onclick="toggle('ans13');">	Réponse</a></div>
+		<div style="display:none" id="ans13">
+		<p>Vrai</p></div>
+
+	<div id="question14">
+		<h5> Question 1.4 : </h5>
+		<p> La gestion des tâches pour une imprimante</p>
+		<a href="#" onclick="toggle('ans14');">	Réponse</a></div>
+		<div style="display:none" id="ans14">
+		<p>Faux</p></div>
+
+	<div id="question15">
+		<h5> Question 1.5 : </h5>
+		<p> L’évaluation d’expressions postfixes</p>
+		<a href="#" onclick="toggle('ans15');">	Réponse</a></div>
+		<div style="display:none" id="ans15">
+		<p>Vrai</p></div>
+
+	<div id="question16">
+		<h5> Question 1.6 : </h5>
+		<p> Un contenant de chips <i>Pringles</i> </p>
+		<a href="#" onclick="toggle('ans16');">	Réponse</a></div>
+		<div style="display:none" id="ans16">
+		<p>Vrai</p></div>
+
+	<div id="question17">
+		<h5> Question 1.7 : </h5>
+		<p>Un poste de péage</p>
+		<a href="#" onclick="toggle('ans17');">	Réponse</a></div>
+		<div style="display:none" id="ans17">
+		<p>Faux</p></div>
+
+	<div id="question18">
+		<h5> Question 1.8 : </h5>
+		<p>Le bouton «Précédent» dans votre fureteur (« Browser »)</p>
+		<a href="#" onclick="toggle('ans18');">	Réponse</a></div>
+		<div style="display:none" id="ans18">
+		<p>Vrai</p></div>
+
+	<p></p>
+
+<h3>Application</h3>
+
+<p>Cette partie du laboratoire porte sur deux des trois
+  implémentations de l'interface Stack. Il s'agit de deux
+  implémentations lesquelles vous pourriez être évalué à l'examen de mi-session.</p>
+
+<h4>1.1 Modifier l'interface Stack : ajout d'une méthode clear()</h4>
+<p>Modifiez l'interface Stack ci-bas afin d'y ajouter la méthode abstraite public void clear(). </p>
+<pre class="prettyprint lang-java"><code>public interface Stack&lt;E&gt; {
+    boolean isEmpty();
+    E peek();
+    E pop();
+    void push(E element);
+}</code></pre>
+
+
+<h6>Fichier :</h6>
+<ul>
+  <li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab6_template/Stack.java">Stack.java</a></li>
+</ul>
+
+<h4>1.2 Implémenter la méthode clear() de la classe ArrayStack</h4>
+<p>La classe <strong>ArrayStack</strong> utilise un tableau de taille fixe et réalise l'interface <strong>Stack</strong>. Puisque l'interface <strong>Stack</strong> a été modifiée afin d'y ajouter la méthode <strong>clear()</strong>, l'implémentation de la classe <strong>ArrayStack</strong> est défectueuse (essayez d'abord de la compiler sans y apporter de changement, quel message d'erreur est affiché à l'écran ?). </p>
+<p>Puisque la classe <strong>ArrayStack</strong> réalise l'interface Stack, elle doit fournir une implémentation pour toutes les  méthodes de l'interface. Ainsi, vous devez écrire une méthode <strong>void clear()</strong>. Cette dernière retire tous les éléments de cette pile (<strong>ArrayStack</strong>). La pile sera vide suite à cet appel. Utilisez la classe <b>L6Q1</b> pour tester votre implémentation de la méthode clear.</p>
+
+<h6>Fichiers :</h6>
+<ul>
+
+  <li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab6_template/ArrayStack.java" target="_blank">ArrayStack.java</a></li>
+  <li><a href="http://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab6_template/L6Q1.java" target="_blank">L6Q1.java</a></li>
+
+ </ul>
+
+
+<h4>1.3 Créer une nouvelle classe DynamicArrayStack </h4>
+<p>Modifier la classe <strong>ArrayStack</strong> afin qu'elle utilise la technique de <b>tableau dynamique</b>. Cette nouvelle classe, <b>DynamicArrayStack</b>, possède une constante nommée <i>DEFAULT_INC</i> dont la valeur est 25.  Le constructeur prend un argument, <i>capacity</i>, qui est la taille initiale du tableau (ont dit aussi taille physique de la pile).  Cependant, la taille physique (longueur du tableau) n'est jamais moins que DEFAULT_INC (donc 25).
+Cette classe contient aussi une méthode d'accès (<i>getter</i>), <b>getCapacity()</b>, qui retourne un entier représentant la longueur du tableau (taille physique).  Lorsque votre tableau est plein, un nouveau tableau ayant <i>DEFAULT_INC</i> cellules de plus que la taille actuelle du tableau doit être créée. Vous devez y copier les éléments de l'ancien tableau.
+Par ailleurs, à l'inverse, lorsque la taille logique de la pile (nombre d'éléments) a <i>DEFAULT_INC</i> éléments de moins que la taille physique de la pile (taille du tableau), vous devez automatiquement en diminuer la taille (le nouveau tableau a alors <i>DEFAULT_INC</i> cellules de moins que l'ancien tableau). Faites les ajustements nécessaires, notamment dans <b>pop</b>, <b>push</b>, <b>clear</b> et les constructeurs (rappel, la taille physique (taille du tableau) minimale est <i>DEFAULT_INC</i>).</p>
+
+<h6>Fichier :</h6>
+<ul>
+  <li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab6_template/DynamicArrayStack.java">DynamicArrayStack.java</a></li>
+</ul>
+
+
+       <p>&nbsp;</p>
+    </div>
+					</div>
+					</div>
+
+
+ <!------------------------2nd part ------------------------------------>
+
+
+					<div class="bb-item" id="item2">
+						<div class="content">
+						<div class="scroller">
+<h1>Deuxième partie</h1>
+
+Cette partie est laissée à votre propre discrétion et n’a pas besoin d’être remise. Toutefois, comme cette matière est
+peut être couverte à l’examen de mi-session, nous vous recommandons fortement de la parcourir.
+<h2>Les expressions postfixes</h2>
+<h3>Introduction</h3>
+<p>Les expressions postfixes sont un exemple d'application des piles. Tel que vu en classe, il s'agit d'une méthode où l'on empile (<b>push</b>) les opérandes de l'expression jusqu'à ce que l'on rencontre un opérateur. À ce moment, on retire (<b>pop</b>) les deux éléments précédents, des opérandes. On effectue l'opération et on empile ensuite le résultat dans la pile avec les autres opérandes. À la fin de la lecture de l'expression, il ne devrait nous rester qu'un élément, soit un nombre dans notre pile.</p>
+<p>Prenons l'expression postfixe: <b> 5 2 - 4 * </b></p>
+<ol>
+	<li>D'abord, on lit l'expression de gauche à droite. Il s'agit de nombres qui serviront d'opérandes, donc on les empile: <b>Bottom [5 2 </b></li>
+	<li>À la rencontre d'un opérateur, ici « - », on retire 2 opérandes de la pile 2 et 5 respectivement. On effectue l'opération. Notez que l'<b>ordre est important</b>, le second élément retiré « 5 » moins « - » le premier élément retiré « 2 ».
+	 On empile ensuite le résulat « 3 » à la pile (n'oubliez pas que 5 et 2 ont été retirés). <b>Bottom [3 </b></li>
+	<li>Le prochain élément est « 4 ». Comme il s'agit d'un nombre, on l'empile: <b>Bottom [3 4 </b></li>
+	<li>Enfin, on lit « * ». Comme il s'agit d'un opérateur (multiplication), on retire les deux éléments du dessus, 4 et 3 respectivement. On effectue l'opération « 3 * 4 » et on empile le résultat. <b>Bottom [12 </b></li>
+	<li>Nous avons utilisé tous les éléments de notre expression postfixe et il ne nous reste qu'une valeur dans notre pile. « 12 » est donc le résulat de notre expression!</li>
+
+</ol>
+<p><b>Note</b>: Si vous rencontrez un opérateur dans votre expression et qu'il n'y a pas 2 nombres (opérandes) sur le dessus de votre pile, l'expression postfixe est <b>invalide</b>. Il va de même si vous avez plus d'un nombre dans votre pile à la fin de la lecture de votre expression!</p>
+
+<h4>Pratiquez-vous! Ce concept peut faire partie de votre examen de mi-session!</h4>
+
+<p>Voici une série d'exercices simples. Assurez-vous de bien comprendre comment lire des expressions postfixes et aussi de convertir une expression arithmétique en expression postfixe.</p>
+
+
+	<div id="question21">
+		<h5> Question 2.1 : </h5>
+		<p> Convertissez l'expression suivante en <b>expression postfixe</b>: 5 * 3 + 5 </p>
+		<a href="#" onclick="toggle('ans21');">	Réponse</a></div>
+		<div style="display:none" id="ans21">
+		<p>5 3 * 5 +</p></div>
+
+	<div id="question22">
+		<h5> Question 2.2 : </h5>
+		<p>Convertissez l'expression suivante en <b>expression postfixe</b>: 4 - 6 / 3 * 2 </p>
+		<a href="#" onclick="toggle('ans22');">	Réponse</a></div>
+		<div style="display:none" id="ans22">
+		<p>4 6 3 / 2 * -</p></div>
+
+	<div id="question23">
+		<h5> Question 2.3 : </h5>
+		<p> <b>Évaluez</b> l'expression postfixe suivante (trouvez le résultat): 9 2 * 6 / 2 3 * + </p>
+		<a href="#" onclick="toggle('ans23');">	Réponse</a></div>
+		<div style="display:none" id="ans23">
+		<p>9</p></div>
+
+	<div id="question24">
+		<h5> Question 2.4 : </h5>
+		<p> <b>Évaluez</b> l'expression postfixe suivante (trouvez le résultat): 4 2 8 * - + 7 + </p>
+		<a href="#" onclick="toggle('ans24');">	Réponse</a></div>
+		<div style="display:none" id="ans24">
+		<p>Erreur! Cette expression postfixe n'est pas valide!</p></div>
+
+<p></p>
+
+<h3>Application</h3>
+
+<h4>2.1 Algo1</h4>
+<p>Pour cette partie du laboratoire, il y a deux algorithmes pour la validation d'expressions contenant des parenthèses  (rondes, frisées et carrées). </p>
+<p> La classe <strong>Balanced</strong> ci-dessous présente le premier algorithme <b>algo1</b>, une version simple pour valider des expressions. On remarque qu'une  expression bien formée est telle que pour chaque type de parenthèses (les rondes, les frisées et les carrées), le  nombre de parenthèses ouvrantes est égal au nombre de parenthèses fermantes. D'où l'algorithme suivant : </p>
+
+<pre class="prettyprint lang-java"><code>public static boolean algo1(String s) {
+
+	int curly, square, round;
+
+	curly = square = round = 0;
+
+	for (int i=0; i &lt; s.length(); i++) {
+
+		char c;
+		c = s.charAt(i);
+
+		switch (c) {
+			case ’{’:
+				curly++;
+				break;
+			case ’}’:
+				curly--;
+				break;
+			case ’[’:
+				square++;
+				break;
+			case ’]’:
+				square--;
+				break;
+			case ’(’:
+				round++;
+				break;
+			case ’)’:
+				round--;
+		}
+	}
+
+	return curly == 0 && square == 0 && round == 0;
+}</code></pre>
+
+
+<p> Compilez ce programme et expérimentez. D'abord, assurez-vous qu'il fonctionne pour des expressions valides,  telles que &ldquo;()[]()&rdquo;, &ldquo;([][()])&rdquo;. Vous remarquerez que l'algorithme fonctionne aussi pour des expressions qui contiennent  des opérandes et des opérateurs : &ldquo;(4 * (7 - 2))&rdquo;. </p>
+<p> Ensuite, vous devez trouver des expressions pour lesquelles l'algorithme retourne true bien que ces expressions  ne sont pas bien formées. </p>
+<h6>Fichier</h6>
+<ul>
+    <li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab6_template/Balanced.java">Balanced.java</a></li>
+</ul>
+
+<h4>5. Algo2</h4>
+
+<p>Vous avez trouvé des expressions qui font échec à cet algorithme. Très bien ! En effet, une expression bien formée est une expression telle que le nombre de parenthèses ouvrantes et fermantes est le même, et ce, pour chaque type de parenthèses. Mais aussi, lorsqu’on lit une telle expression de gauche à droite et que l’on rencontre une parenthèse fermante alors son type doit être le même que celui de la dernière parenthèse ouvrante rencontrée qui n’a pas encore été traitée (associée).
+Par exemple, « (4 + [2 - 1)] » n'est pas valide!</p>
+<p>Vous devez implémenter un algorithme à base de pile afin de valider des expressions : retourne <b>true</b> si l’expression est bien formée et <strong>false</strong> sinon. De plus, l’analyse ne devrait parcourir la chaîne qu’une seule fois. Vous devez créer votre implémentation dans la class Balanced, nommez cette méthode <strong>algo2</strong>. (La solution modèle a 15 lignes !) </p>
+<p>Faites plusieurs tests à l’aide d’expressions valides et non valides. Assurez-vous que votre algorithme traite ce cas-ci : “((())” ? Comment traitez-vous ce cas-ci ? </p>
+
+      <p>&nbsp;</p>
+  			</div>
+						</div>
+					</div>
+
+ <!------------------------3rd part ------------------------------------>
+
+					<div class="bb-item" id="item3">
+						<div class="content">
+						  <div class="scroller">
+    <h1>Troisième partie </h1>
+<h2>Structures de données génériques</h2>
+<p>Les interfaces et les classes peuvent avoir un paramètre de
+  type. On parle alors de <b>types génériques</b>. Ces types peuvent
+  être utilisées dans plusieurs contextes. Rappelez-vous de
+  l'interface Comparable! Les types génériques sont à la fois
+  versatiles et sécuritaires.</p> 
+
+<h6>Fichiers :</h6>
+<ul>
+
+  <li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab6_template/Map.java" target="_blank">Map.java</a></li>
+  <li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab6_template/Dictionary.java" target="_blank">Dictionary.java</a></li>
+  <li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab6_template/Pair.java" target="_blank">Pair.java</a></li>
+
+ </ul>
+
+<h4>3.1 Implémenter l'interface Map</h4>
+
+    <p>
+      Définir l'interface <b>Map</b>. Une classe qui réalise
+      l'interface <b>Map</b> doit sauvegarder des associations
+      clé-valeur (key-value). Ici, nous souhaitons qu’un
+      objet <b>Map</b> puisse contenir plusieurs clés (key)
+      identiques, auquel cas les
+      méthodes <b>get</b>, <b>put</b>, <b>replace</b> et <b>remove</b>
+      feront référence à la l’association contenant cette clé se
+      trouvant la plus à droite (la plus récente). <b>Map</b> possède
+      deux paramètres de type, <b>K</b> et <b>V</b>, où <b>K</b> est
+      le type des clés (keys) et <b>V</b> le type des valeurs
+      (values). L'interface
+      <b>Map</b> possède les méthodes suivantes :
+    </p>
+<ol>
+<li><b>V get(K key) </b>: retourne la <b>valeur</b> la plus à droite (rightmost value) associée avec la clé spécifiée en paramètre. </li>
+<li><b>boolean contains(K key) </b>: retourne <b>true</b> s’il existe une association pour la clé spécifiée en paramètre. </li>
+<li><b>void put(K key, V value) </b>: crée une nouvelle association <b>key-value</b>.</li>
+<li><b>void replace(K key, V value) </b>: remplace la <b>valeur</b> associée à l’association la plus à droite possédant la clé spécifiée en paramètre (replaces the value of the rightmost occurrence of the association for the specified key) </li>
+<li><b>V remove(K key) </b>: retire <b>l’association</b> la plus à droite  possédant la clé spécifiée et retourne la valeur qui était associée à cette clé. </li>
+</ol>
+<p>Notez qu’aucun paramètre ne peut être <b>null</b> dans chacune de
+ces méthodes.</p>
+
+
+<h4>3.2 Implémenter la classe Dictionary</h4>
+<p><b>Dictionary</b> garde la trace des associations <b>String-Integer</b> (key-value). </p>
+<ul>
+<li>La classe <b>Dictionary</b> réalise (implements) l’<b>interface Map &lt;String,Integer &gt;</b>.</li>
+	<li>Elle utilise un tableau (première variable d'instance) pour stocker chaque association. Les éléments de ce tableau sont de type <b>Pair</b>. Un objet de type <b>Pair</b> doit stocker une association, « key » et « value », de type <b>String</b> et <b>Integer</b> respectivement. Etudiez le fichier fournit et déjà complété. </li>
+	<li>Vous devez traiter votre tableau d'éléments comme une pile. Ainsi, le bas de votre pile sera l'élément 0, tandis que le dessus de la pile sera l'élément non-null à la position la plus élevée. Utilisez un compteur (seconde variable d'instance) qui vous indiquera combien d'éléments sont dans votre tableau.</li>
+	<li>Finalement, comme la classe <b>Dictionary</b> stocke une quantité arbitrairement large d’associations, vous devrez utiliser la technique de <b>tableau dynamique</b> (comme présenté dans la partie 1). La <b>taille initiale</b> du tableau sera de 10, tandis que son <b>incrément</b> sera de 5 à chaque fois que le tableau est plein. Ces deux valeurs seront traitées comme des constantes.</li>
+	<li>Vous devez évidemment implémenter <b>toutes les méthodes</b> de l'interface. N'oubliez pas de considérer que l'association (élément de type Pair) <b>la plus à droite</b> sera toujours celle qui est <b>la plus au-dessus</b> de la pile! Vous devrez donc parcourir votre tableau en sens inverse.</li>
+	<li>Ajoutez une méthode <b>toString</b> qui imprime les éléments de votre tableau du dernier au premier (haut de la pile au bas de la pile).</li>
+  <li>Il contient des getters, getCount () qui renvoie le nombre actuel d'éléments dans le dictionnaire et getCapacity () qui renvoie la longueur actuelle du tableau.</li>
+
+	<li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab6_template/DictionaryTest.java" target="_blank">DictionaryTest.java</a> comprend une série de tests pour votre implémentation. </li>  
+</ul>
+
+Notez qu'il n'est pas nécessaire de gérer des entrées exceptionnelles dans votre solution (par exemple, supprimer, obtenir ou remplacer une clé qui n'existe pas.)
+
+
+  <p>&nbsp;</p>
+  			</div>
+						</div>
+					</div>
+
+          <!-- 4th part -->
+
+          <div class="bb-item" id="item4">
+            <div class="content">
+              <div class="scroller">
+
+		<h1>Quatrième partie</h1>
+
+		<h2>Créer et soumettre un fichier zip (1 point)</h2>
+
+		<h3>Directives</h3>
+
+		<ul>
+		  <li>
+                    Créez un répertoire que vous
+                    nommerez <strong>lab6_123456</strong>,
+                    où vous remplacerez 123456 par votre numéro
+                    d'étudiant. Notez que le nom du répertoire est en
+                    minuscules, incluant la lettre «l».
+                  </li>
+		  <li>
+                    Dans ce répertoire, placer les fichiers pour les
+                    exercices du laboratoire. N'y ajoutez que le code
+                    source, les fichiers .java. En particulier, ne
+                    soumettez pas les fichiers .class.
+                  </li>
+		  <li>
+                    Dans ce répertoire, créez aussi un fichier texte
+                    nommé <strong>README.txt</strong>, qui devra
+                    contenir votre nom, numéro d'étudiant, ainsi
+                    qu'une brève description du contenu (en français
+                    ou en anglais, c'est votre choix) :
+		    <pre>
+
+Nom de l'étudiante ou de l'étudiant: Paidge Beaulieu
+Numéro d'étudiant: 123456
+Code du cours: ITI1521
+Section de laboratoire: A02
+
+Cette archive contient les 7 fichiers du laboratoire 6.
+
+Spécifiquement, ce fichier (README.txt), ainsi que
+ArrayStack.java, Dictionary.java, DynamicArrayStack.java, Pair.java, Map.java, Stack.java.
+
+                    </pre>
+		  </li>
+		  <li>
+                    Créez un fichier zip <strong>
+                    lab6_123456.zip</strong> à partir du répertoire <strong>lab6_123456</strong>.
+                  </li>
+		  <li>
+                    Assurez-vous que cette archive comprend tous les
+                    fichiers nécessaires. Pour ce faire, copiez le
+                    fichier zip quelque part, ouvrez-le et
+                    assurez-vous que les fichiers et les répertoires
+                    espérés s'y trouvent.
+                  </li>
+		  <li>
+                    Soumettez l'archive sur le site Web <a href="https://uottawa.brightspace.com/">https://uottawa.brightspace.com/</a>.
+                  </li>
+		</ul>
+
+<h4>Remarques importantes!</h4>
+Nous utilisons des scripts automatisés pour tester et évaluer votre soumission de laboratoire. Par conséquent, vous devez suivre ces instructions à la lettre. En particulier:
+<ul>
+<li>Les noms de tous les fichiers et méthodes doivent être exacts. Utilisez le code de démarrage fourni pour éviter des problèmes.</li>
+<li>Il faut soumettre un fichier .zip; pas de fichiers individuels; pas un .rar, pas un .7z, ni rien d’autre. </li>
+<li>Tous les fichiers de java doivent être présents et compiler avec succès (autrement dit, l’exécution de javac *.java ne doit générer aucune erreur), même si vous n’êtes pas capable de compléter un exercice. </li>
+<li>Notez si le code ne sera pas compilé en raison d'erreurs de syntaxe, vous n'obtiendrez pas de marque. Même si vous ne pouvez pas à résoudre complètement cet exercice, vous devez déposer un fichier contenant les méthodes intactes qui compilent correctement (vous pouvez mettre "return 0" si vous avez abandonné). </li>
+<li>Votre travail doit être soumis au plus tard à 23h30
+  le mardi de la semaine prochaine.</li>
+</ul>
+<h4>JUnits</h4>
+
+Pour vous assurer que votre code est correct, nous avons préparé quelques <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab6_template/JUnit06.zip">tests unitaires</a>.
+
+                <h4>Resources</h4>
+                <ul>
+                  <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/application/index.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/application/index.html</a></li>
+                  <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html</a></li>
+                  <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/cupojava/unix.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/cupojava/unix.html</a></li>
+                  <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/problems/index.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/problems/index.html</a></li>
+                </ul>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+				<nav>
+					<span id="bb-nav-prev">&larr;</span>
+					<span id="bb-nav-next">&rarr;</span>
+				</nav>
+
+				<span id="tblcontents" class="menu-button">Table of Contents</span>
+
+			</div>
+
+		</div><!-- /container -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script src="js/jquery.mousewheel.js"></script>
+		<script src="js/jquery.jscrollpane.min.js"></script>
+		<script src="js/jquerypp.custom.js"></script>
+		<script src="js/jquery.bookblock.js"></script>
+		<script src="js/page.js"></script>
+		<script>
+			$(function() {
+
+				Page.init();
+
+			});
+		</script>
+	</body>
+</html>

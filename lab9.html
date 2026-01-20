@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>ITI 1521 - Laboratoire 9</title>
+		<meta name="description" content="ITI1521 labs" />
+		<meta name="keywords" content="fullscreen pageflip, booklet, layout, bookblock, jquery plugin, flipboard layout, sidebar menu" />
+		<link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.custom.css" />
+		<link rel="stylesheet" type="text/css" href="css/bookblock.css" />
+		<link rel="stylesheet" type="text/css" href="css/custom.css" />
+		<script src="js/modernizr.custom.79639.js"></script>
+		<script type="text/javascript" src="js/google-code-prettify/src/run_prettify.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/prettify.css"/>
+
+
+	</head>
+	<body>
+		<div id="container" class="container">	
+
+			<div class="menu-panel">
+				<h3>Table des matières</h3>
+				<ul id="menu-toc" class="menu-toc">
+					<li class="menu-toc-current"><a href="#item1">Partie 1</a></li>
+					<li><a href="#item2">Partie 2</a></li>
+					<li><a href="#item3">Partie 3</a></li>
+					<li><a href="#item4">Partie 4</a></li>
+					<li><a href="#item5">Partie 5</a></li>
+					<!--<li><a href="#item4">Quatrième partie</a></li>
+					<li><a href="#item5">Cinquième partie</a></li>-->
+				</ul>
+				<!--<div>
+					<a href="">some link here</a>  
+					
+				</div>-->
+			</div>
+
+			<div class="bb-custom-wrapper">
+				<div id="bb-bookblock" class="bb-bookblock">
+    
+<!------------------------1st part ------------------------------------>  
+
+					<div class="bb-item" id="item1">
+						<div class="content">
+							<div class="scroller"> <h1>Première partie</h1> 
+
+
+<div class="content_bullet_box objectifs_box">
+<h3>Objectifs d'apprentissage</h3>
+
+<ul>
+     <li><strong>Concevoir</strong> un programme Java pour lire des données du clavier ou d'un fichier texte.</li>
+     <li><strong>Concevoir</strong> un programme Java pour écrire des données sur la sortie ou dans un fichier texte.</li>
+     <li><strong>Modifier</strong> un  programme  Java  existant  afin  de  déclarer  toutes  les  exceptions  à  déclaration obligatoire.</li>
+</ul>
+</div>
+<h2>Introduction</h2> 
+<p>Ce laboratoire comporte plusieurs parties. La première partie introduit les concepts de base des entrées-sorties qui seront nécessaires pour réaliser ce laboratoire (conservez ces notes et ces exemples, ça vous sera utile pour le cours structures de données). La seconde partie consiste à modifier l’application <b>PlayListManager</b> afin de lire/écrire les chansons à partir de fichiers.</p> 
+
+<h4>1. Entrées-sorties (E/S) en Java</h4>
+<p>Ce document présente les éléments de base pour faire des entrées-sorties (E/S) en Java. Il couvre un  sous-ensemble des classes du package java.io. Depuis la version 1.4 de Java, il y a un nouveau package,  java.nio (new io), définissant des concepts plus avancés d'E/S tels que les «buffers», «channels», et «memory  mapping», ces sujets ne seront pas couverts ici. </p>
+<p> Les entrées-sorties en Java semblent assez complexes à première vue. Tout d'abord, il y a un très grand  nombre de classes. Ensuite, il faut combiner plusieurs objets pour réaliser les traitements. Pourquoi cette  complexité ? Java est un langage moderne, développé au milieu des années 1990s alors que le Web allait      devenir une réalité. Ainsi, les données peuvent être lues et écrites à partir de plusieurs sources, dont le  clavier, la console, des disques externes, mais aussi le réseau. De plus, la présence du Web a aussi stimulé la  création de classes permettant l'internationalisation de programmes (pour les postes de travail anglophones,  pour les langues européennes, mais aussi arabes et orientales) ainsi que le traitement de données  multimédia. </p>
+<h5>1.1 Définitions</h5>
+<p>Un <strong>flux</strong> (stream) est une séquence ordonnée de données ayant une source ou une destination. Il y a  deux genres de flux : les <strong>flux de caractères </strong>(character streams) et les <strong>flux d'octets</strong> (byte  streams). </p>
+<p> Java utilise des Unicodes pour encoder les caractères — les flux de caractères sont en général associés aux  entrées-sorties de textes (donc lisible par l'humain). Les flux de caractères s'appellent readers et writers. Ce  document traite principalement de ces types de flux. Les flux d'octets (byte streams) sont associés aux  entrées-sorties de données (binaires). Les fichiers audio et vidéo, jpeg et mp3, en sont des exemples. Les  informations peuvent être lues ou écrites sur un support externe. Pour chaque flux en lecture (ou reader), il  existe un flux en écriture (ou writer) correspondant. Il existe aussi un troisième mode d'accès,  le mode direct, permettant à la fois les lectures et écritures. Le mode direct n'est pas traité  ici. </p>
+
+<h5>1.2 Exposé général</h5>
+<p>Il existe deux genres de flux et trois modes d'accès. </p>
+<ul>
+  <li><strong>Flux :</strong> caractères ou octets ; </li>
+  <li><strong>Accès :</strong> lecture, écriture ou direct.</li>
+</ul>
+<p>De plus, le support utilisé (clavier, console, disque, mémoire, réseau, etc.) impose aussi ses propres contraintes  (faut-il un tampon (buffer) ou pas, par exemple). Le package java.io comporte quelque 50 classes, 10  interfaces et plus de 15 exceptions. Le grand nombre de classes pourrait à lui seul intimider les nouveaux  programmeurs. Pour ajouter à cette complexité, il faut généralement combiner des objets de  deux ou trois classes afin d'effectuer quelque traitement que ce soit, comme le démontre cet  exemple. </p>
+
+<pre class="prettyprint lang-java"><code>InputStreamReader in = new InputStreamReader( new FileInputStream( "data" ) ); </code></pre>
+
+
+
+<p>Ici &ldquo;data&rdquo; est le nom d'un fichier d'entrée. Les sections qui suivent passent en revue les principaux concepts  liés aux entrées-sorties en Java. La majorité des concepts sont accompagnés d'exemples et d'exercices.  Compilez et exécutez tous les exemples. Complétez tous les exercices. </p>
+
+<h5>1.3 Flux</h5>
+<p><strong>InputStream</strong> et <strong>OutputStream</strong> sont deux classes abstraites définissant les méthodes communes aux flux  d'entrée et de sortie. </p>
+
+<h6>1.3.1 InputStream</h6>
+<p>La classe <strong>InputStream</strong> déclare les trois méthodes suivantes. </p>
+<ul>
+  <li><strong>int read() :</strong> Lit le prochain octet du flux d'entrée. L'octet lu est retourné dans un entier, intervalle 0 à 255. Si aucun octet n'est disponible, signifiant que la fin du flux a été atteinte, alors la méthode retourne la valeur -1. </li>
+  <li><strong>int read( byte[] b ) : </strong>Lit plusieurs octets à la fois. Les octets sont sauvegardés dans le tampon (buffer, un tableau) b. La méthode retourne le nombre d'octets lus. </li>
+  <li><strong>close() :</strong> Fermeture du flux d'entrée. Libère les ressources qui lui sont associées. </li>
+</ul>
+<p> La classe <strong>InputStream</strong> est abstraite. Voici des exemples de ses sous-classes : <strong>AudioInputStream,  ByteArrayInputStream, FileInputStream, FilterInputStream, ObjectInputStream,  PipedInputStream, SequenceInputStream</strong> et <strong>StringBufferInputStream</strong>. Parmi celles-ci, la classe  <strong>FileInputStream</strong> sera présentée ci-bas. Cette classe permet la lecture d'octets à partir d'un  fichier. </p>
+
+<h6>1.3.2 OutputStream</h6>
+<p>La classe abstraite <strong>OutputStream</strong> déclare les méthodes qui suivent. </p>
+<ul>
+  <li><strong>write( byte[] b ) :</strong> Écrit b.length octets sur la sortie. </li>
+  <li><strong>flush() :</strong> Vide la mémoire tampon du flux, forçant ainsi l'écriture de tous les octets se trouvant encore dans le tampon. </li>
+  <li><strong>close() :</strong> Fermeture du flux. Libère les ressources associées à ce flux.</li>
+</ul>
+<p>La classe OutputStream est abstraite. Voici des exemples de sous-classes concrètes : <strong>ByteArrayOutputStream,  FileOutputStream, FilterOutputStream, ObjectOutputStream et PipedOutputStream</strong>. Parmi  celles-ci, la classe <strong>FileOutputStream</strong> est utilisée fréquemment et sera étudiée ci-bas. Elle permet l'écriture  de l'octet dans un fichier. </p>
+
+<h6>1.3.3 System.in et System.out</h6>
+<p>Deux objets sont prédéfinis par le système. <strong>System.in</strong> est un flux d'entrée, généralement associé au clavier. <strong>System.out</strong> est un flux de sortie, généralement associé à la console. </p>
+
+<h5>1.4 Étapes</h5>
+<p>L'écriture dans (ou la lecture depuis) un fichier nécessite en général trois étapes : </p>
+<ul>
+  <li>Ouvrir le fichier </li>
+  <li>Écriture (ou lecture) </li>
+  <li>Fermer le fichier</li>
+</ul>
+<p>Il est important de toujours fermer les fichiers afin que les données (possiblement sauvegardées dans un tampon  d'écriture) soient sauvegardées dans le fichier, mais aussi afin de libérer les ressources internes et externes  associées. </p>
+
+<h5>1.5 Lecture</h5>
+<p>Limitons la portée de cette discussion à la lecture à partir d'un fichier ou la lecture à partir du  clavier. </p>
+
+<h6>1.5.1 Lecture à partir d'un fichier</h6>
+<p>Afin de lire des données d'un fichier, il faut créer un objet FileInputStream. Attardons-nous aux deux  constructeurs suivants. </p>
+<ul>
+  <li><strong>FileInputStream( String name ) :</strong> Ce constructeur reçoit le nom du fichier en paramètre. Exemple : 
+  
+  <pre class="prettyprint lang-java"><code>InputStream in = new FileInputStream( "data" ); </code></pre>
+  
+  </li>
+  
+  <li><strong>FileInputStream( File file ) :</strong> Ce constructeur reçoit en paramètre un objet <strong>File</strong>, un objet représentant le fichier externe.</li>
+</ul>
+<pre class="prettyprint lang-java"><code>File f = new File( "data" );  
+InputStream in = new FileInputStream( f );</code></pre>
+
+
+<p> L'objet <strong>File</strong> permet d'effectuer toutes sortes d'opérations sur le fichier. Voici quelques exemples. </p>
+
+<pre class="prettyprint lang-java"><code>f.delete();  
+f.exists();  
+f.getName();  
+f.getPath();  
+f.length();</code></pre>
+
+<p> <strong>FileInputStream</strong> est une sous-classe d'<strong>InputStream</strong>. Tout comme son parent, cette classe ne lit que des  octets. </p>
+
+<h5>1.5.2 InputStreamReader</h5>
+<p>La classe <strong>InputStreamReader</strong> sert de passerelle entre un flux d'octets et un flux de caractères. On l'utilise  comme suit. </p>
+
+<pre class="prettyprint lang-java"><code>InputStreamReader in = new InputStreamReader( new FileInputStream( "data" ) );</code></pre>
+
+<p> ou encore, </p>
+
+<pre class="prettyprint lang-java"><code>InputStreamReader in = new InputStreamReader( System.in );</code></pre>
+
+
+<p> L'objet <strong>System.in</strong> est généralement associé au clavier du poste de travail. </p>
+<ul>
+  <li><strong>int read() :</strong> Lecture d'un caractère. Retourne -1 lorsque la fin de l'entrée est atteinte (end-of-file (eof), end-of-stream (eos)). L'entier doit être converti en caractère.
+  
+  <pre class="prettyprint lang-java"><code>int i = in.read();  
+if ( i != -1 ) {  
+    char c = (char) i;  
+}</code></pre>
+  
+  
+    <p> Voir <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab9_template/Unicode.java">Unicode.java</a> et <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab9_template/Keyboard.java">Keyboard.java</a>. </p>
+  </li>
+  <li><strong>int read( char [] b ) :</strong> Lit plusieurs caractères à la fois. Les caractères sont mis dans le tableau <strong>b</strong>. La méthode retourne le nombre de caractères lus ou <strong>-1</strong> si la fin est atteinte. 
+    
+  <pre class="prettyprint lang-java"><code>char[] buffer = new char[ 256 ];  
+num = in.read( buffer );  
+String str = new String( buffer ); </code></pre>
+  </li>
+</ul>
+
+  <p> <strong>Exercice 1 :</strong> Concevez une classe afin de lire des caractères au clavier utilisant la méthode <strong>read(  char[] b )</strong> ; le nombre de caractères lus est déterminé par la taille du tableau (tampon). Utilisez la  classe <strong>Keyboard</strong> comme point de départ. Voici une liste des modifications majeures que vous devrez faire.</p>
+<ol>
+	<li>Vous n'avez plus besoin de la variable i pour stocker les valeurs lues. Vous utiliserez plutôt un <i>buffer</i> de type <b>char[]</b> tel que vu précédemment.</li>
+	<li>Vous devez changez la condition de votre boucle while. Notamment, la variable i ne fait plus partie de la solution, tandis que vous utiliserez une méthode <strong>read(  char[] b )</strong> à la place.</li>
+	<li>Une fois la lecture faite par la méthode read, l'entrée est stockée dans votre variable tampon (buffer). Vous devez alors la convertir en chaîne de caractères (String).</li>
+	<li>Sachez que certains symboles ne sont pas affichables. Vous devez utiliser la méthode trim afin de retirer les  caractères non affichables. Notamment, <b>votreString.trim()</b> retourne un nouvel objet de type String sans ces caractères non affichables</li>
+	<li>Imprimez maintenant la chaîne de caractère que vous avez obtenue à la console.</li>
+	<li>Finalement, vider votre tampon avec la commande suivante: <b>Arrays.fill( buffer, '\u0000' );</b></li>
+</ol>
+<p>Faites quelques tests. Peu importe le nombre de caractères lus, la longueur de la chaîne est toujours 256. </p>
+<p>Version initiale de<a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab9_template/Keyboard.java">Keyboard.java</a> . </p>
+
+<h5>1.5.3 BufferedReader</h5>
+<p>Certaines applications doivent lire les données <b>ligne par ligne</b>. Pour ces applications, nous utiliserons un  (objet) <strong>BufferedReader</strong>. BufferedReader utilise un objet de la classe <b>InputStreamReader</b> afin de lire les  données. Ce dernier, InputStreamReader utilise InputStream afin de lire les octets. Chaque couche (objet)  ajoute de nouvelles fonctions. <b>InputStreamReader convertit les octets en caractères</b>. Finalement, <b>BufferedReader regroupe les caractères en chaînes de caractères</b>, par exemple une ligne à la  fois. </p>
+
+ <pre class="prettyprint lang-java"><code>FileInputStream f = FileInputStream( "data" );  
+InputStreamReader is = new InputStreamReader( f );  
+BufferedReader in = new BufferedReader( is ); </code></pre>
+
+<p> ou </p>
+
+ <pre class="prettyprint lang-java"><code>BufferedReader in = new BufferedReader(  
+      new InputStreamReader(  
+    new FileInputStream("data") ) );  
+String s = in.readLine(); </code></pre>
+
+<p>La classe <b>Copy</b> est un programme qui copie le contenu d'un fichier à votre console.
+<p>Notez que le traitement des exceptions est omis dans cet exemple.</p>
+<pre class="prettyprint lang-java"><code>import java.io.*;
+
+public class Copy {
+
+    public static void copy( String fileName ) 
+        throws IOException, FileNotFoundException {  
+
+        InputStreamReader input;
+
+        input = new InputStreamReader( new FileInputStream( fileName ) ); //open file
+        
+        int c;
+        while ( ( c = input.read() ) != -1 ) {  //we read character by character
+            System.out.write( c );		//prints on the console
+        }
+
+        input.close();	//close the opened file
+    }
+
+    public static void main( String[] args ) 
+        throws IOException, FileNotFoundException {
+
+        if ( args.length != 1 ) {
+            System.out.println( "Usage: java Copy file" );
+            System.exit( 0 );
+        }
+
+        copy( args[0] );
+
+    }
+}</code></pre>
+
+<p>Vous pouvez remarquez que le programme <b>Copy</b> copie le contenu du fichier donné en paramètre un caractère à la fois, et ce, jusqu'à ce que la fin du flux de données (eof: end of stream), -1, soit lue par le <b>InputStreamReader</b>. Les trois étapes présentées précédemment y sont aussi respectées, c'est-à-dire l'ouverture du fichier, la lecture, et sa fermeture.</p>
+<p> <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab9_template/Copy.java">Copy.java</a></p>
+
+  <p><strong>Exercice 2 :</strong>  Créez un programme affichant toutes les lignes d'un fichier contenant un certain mot.  Affichez aussi le numéro de la ligne. </p>
+  <ul>
+  <li>Vous devrez utiliser la méthode <b>readLine()</b> de la classe <b>BufferedReader</b>. Cette méthode retourne sous forme de chaîne de caractères (un String) le contenu de la ligne ou null si nous avons atteint la fin du fichier.</li>
+  <li>Vous devrez ensuite vérifier si le mot donné fait partie du String. Pour ce faire, utilisez la méthode indexOf(votreMot) qui vous retournera la position de votre mot dans la chaîne de caractères ou -1 s'il n'en fait pas partit.</li>
+</ul>
+<p>Voici le code à partir duquel vous pouvez résoudre le problème. <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab9_template/Find.java">Find.java</a></p>
+
+<p> <strong>Exercice 3 :</strong> Modifier le code de l'exercice précédent afin de calculer le nombre de fois que se trouvent le mot <b>Ottawa</b> dans le fichier suivant : <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab9_template/Ottawa.txt">Ottawa.txt</a></p>
+<p><strong>Indice</strong>: une fois que vous avez trouvé le premier index du mot Ottawa dans le String, vous pouvez diviser votre String en  utilisant a méthode de String <strong>substring(int index)</strong> qui retourne un nouvel objet de type String contenant la chaîne de caractère commençant par le caractère  la position du paramètre index et finissant à la fin du String original.</p>
+
+<p>Plutôt qu’un fichier, il est possible d’utiliser une adresse URL comme source.  Dans ce cas il faut importer « java.net.* », puis créer un nouvel objet URL. Lorsque l’on crée le InputStreamReader, il faut aussi s’assurer d’appeler la méthode  openStream de l’objet URL pour que l’on puisse lire l’information.</p>
+<pre class="prettyprint lang-java"><code>
+URL address = new URL("http://www.google.ca");
+InputStreamReader is = new InputStreamReader(address.openStream());
+  </code></pre>
+
+  <p> <strong>Exercice 4 :</strong> Implémentez une classe afin de télécharger et afficher le contenu d'une page Web. Essayez-la avec plusieurs adresses, notamment avec la page web de ce laboratoire. Comme vous n'utiliserez pas de fichiers pour cet exercice, l'exception <b>FileNotFoundException</b> ne fera pas partie de la déclaration des méthodes parmi les méthodes qui peuvent être lancées (throws).</br>Notez toutefois que
+  l'usage d'objet de la classe <b>URL</b> peut lancer l'exception <b>MalformedURLException</b>.</p>
+
+
+<h4>1.6 Écriture</h4>
+<p>Considérons maintenant l'écriture sur sortie standard ainsi que l'écriture dans un fichier. Vous remarquerez la  similarité avec la lecture. </p>
+
+<h5>1.6.1 Écrire dans un fichier</h5>
+<p>Afin d'écrire dans un fichier, nous utiliserons un (objet) FileOutputStream. Voici deux constructeurs. </p>
+<ul>
+  <li><strong>FileOutputStream( String name ) :</strong> Crée un flux de sortie pour l'écriture dans un fichier nommé <strong>name</strong>.
+  
+  <pre class="prettyprint lang-java"><code>OutputStream out = new FileOutputStream( "data" ); </code></pre>
+
+ </li>
+  <li><strong>FileOutputStream( File file ) :</strong> Ce constructeur reçoit un objet File.
+<pre class="prettyprint lang-java"><code>File f = new File( "data" );  
+OutputStream out = new FileOuputStream( f ); </code></pre>
+    <p> Tout comme son parent, OutputStream, cette classe ne sert qu'à l'écriture d'octets. </p>
+  </li>
+  <li><strong>OutputStreamWriter :</strong> Une passerelle pour la conversion de caractères en octets.
+<pre class="prettyprint lang-java"><code>OutputStreamWriter out = new OutputStreamWriter( new FileOutputStream( "data " ) );</code></pre>
+    <p> ou </p>
+   <pre class="prettyprint lang-java"><code>OutputStreamWriter out = new OutputStreamWriter( System.out );
+
+OutputStreamWriter err = new OutputStreamWriter( System.err ); </code></pre>
+ 
+    <p> Les messages d'erreurs sont en général écrits sur System.err, la sortie standard. Voici les méthodes de la classe OutputStreamWriter. </p>
+    <ul>
+      <li><strong>write( int c ) :</strong> Écrit un seul caractère ; </li>
+      <li><strong>write( char[] buffer ) :</strong> Écrit le contenu du tableau sur la sortie ; </li>
+      <li><strong>write( String s ) :</strong> Écriture d'une chaîne de caractères.</li>
+    </ul>
+
+      <p> <strong>Exercice 5</strong> : Modifiez le programme Copy.java afin de spécifier un fichier destination. Ainsi, l'application copie le contenu d'un fichier d'entrée dans un fichier en sortie. </p>
+	   <p><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab9_template/Find.java">Copy.java</a></p></li>
+
+  <li><strong>PrintWriter : </strong>Cette classe définit un ensemble de méthodes permettant l'écriture de valeurs d'un type primitif ou objet. 
+  
+   <pre class="prettyprint lang-java"><code>print( boolean b )  : Prints a boolean value.  
+print( char c )     : Prints a character.  
+print( char[] s )   : Prints an array of characters.  
+print( double d )   : Prints a double-precision floating-point number.  
+print( float f )    : Prints a floating-point number.  
+print( int i )      : Prints an integer.  
+print( long l )     : Prints a long integer.  
+print( Object obj ) : Prints an object.  
+print( String s )   : Prints a string.</code></pre>
+
+
+
+
+
+  <p> Le méthodes suivantes affichent aussi un séparateur de lignes (le séparateur varie selon le système d'exploitation utilisé, cette difficulté est traitée pour nous par l'objet PrintWriter). </p>
+  
+     <pre class="prettyprint lang-java"><code>println()       : Prints a line separator string.  
+println( boolean b )  : Prints a boolean value.  
+println( char c )     : Prints a character.  
+println( char[] s )   : Prints an array of characters.  
+println( double d )   : Prints a double-precision floating-point number.  
+println( float f )    : Prints a floating-point number.  
+println( int i )      : Prints an integer.  
+println( long l )     : Prints a long integer.  
+println( Object obj ) : Prints an object.  
+println( String s )   : Prints a string.</code></pre>
+</li>
+</ul>
+
+
+<h4>1.7 Fichiers CSV</h4>
+<p>Les fichiers à valeurs séparées par virgules (Comma-Separated Values – CSV ) sont des fichiers de texte simple dans lesquels les données sont enregistrées colonne par colonne, et divisées par un séparateur. Le séparateur est généralement une virgule « , ». Les fichiers de format CSV peuvent être importés ou exportés d’un programme qui enregistre ces données sous forme de tableau. Un <i>parseur</i> (analyseur) peut prendre un fichier CSV et convertir le texte CSV dans un tableau ou un objet qui sera utilisé par le programme.</p>
+
+<p>Par exemple, voici un fichier CSV qui contient un bottin des indicatifs régionaux de différent pays : </p>
+<pre class="prettyprint lang-java"><code>"1","US","United States"
+"2","MY","Malaysia"
+"3","AU","Australia"
+</code></pre>
+
+<p>Dans une application simple, nous utilisons la méthode standard <strong>split()</strong> pour parser le fichier CSV. L’exemple suivant est un fichier CSV simple, sauvegardé dans le fichier  "/Users/admin/csv/country.csv": </p>
+
+<pre class="prettyprint lang-java"><code>"1.0.0.0","1.0.0.255","16777216","16777471","AU","Australia"
+"1.0.1.0","1.0.3.255","16777472","16778239","CN","China"
+"1.0.4.0","1.0.7.255","16778240","16779263","AU","Australia"
+"1.0.8.0","1.0.15.255","16779264","16781311","CN","China"
+"1.0.16.0","1.0.31.255","16781312","16785407","JP","Japan"
+"1.0.32.0","1.0.63.255","16785408","16793599","CN","China"
+"1.0.64.0","1.0.127.255","16793600","16809983","JP","Japan"
+"1.0.128.0","1.0.255.255","16809984","16842751","TH","Thailand"
+</code></pre>
+
+<p>Pour parser le fichier CSV, il suffit de lire le fichier, puis de le diviser par le séparateur (la virgule « , ») en utilisant  <b>line.split(",")</b>. Vous pouvez ensuite prendre le texte parser et l’utiliser ou le formater comme vous le désirez.</p>
+<pre class="prettyprint lang-java"><code>import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class CSVReader {
+
+    public static void main(String[] args) {
+
+        String csvFile = "/Users/admin/csv/country.csv";
+        BufferedReader br = null;
+        String line = "";
+
+        try {
+
+            br = new BufferedReader(new FileReader(csvFile));
+            while ((line = br.readLine()) != null) {
+
+                // use comma as separator
+                String[] country = line.split(",");
+
+                System.out.println("Country [code= " + country[4] + " , name=" + country[5] + "]");
+
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+}
+</code></pre>
+
+<p>Exécuter le code si dessus nous donne une possibilité de formatage des données, voici la sortie :</p>
+
+<pre class="prettyprint lang-java"><code>Country [code= "AU" , name="Australia"]
+Country [code= "CN" , name="China"]
+Country [code= "AU" , name="Australia"]
+Country [code= "CN" , name="China"]
+Country [code= "JP" , name="Japan"]
+Country [code= "CN" , name="China"]
+Country [code= "JP" , name="Japan"]
+Country [code= "TH" , name="Thailand"]
+</code></pre>
+
+<p>Lorsque l’on parse des fichiers CSV, il y a deux problèmes courants :</p>
+<ol>
+<li>Le séparateur est aussi contenu dans les données. Par exemple : "aaa","b,bb","ccc". Dans ce cas, la virgule « , » est le séparateur, mais elle apparait aussi dans la donne <strong>b,bb</strong> que nous ne voulons pas séparer.</li>
+<li>Les guillemets anglais « " »  sont utilisés pour contenir les données, mais les données contiennent aussi des guillemets anglais. Par exemple :  "aaa","b""bb","ccc". Dans ce cas, les guillemets sont contenus dans la donnée <b>b""bb</b>. Notez que pour que le guillemet apparaisse dans la donnée, il doit être échappé en la précédant par un autre guillemet.</li>
+</ol>
+
+<p>Pour ces deux problèmes courants, il existe des solutions plus avancées qui sont requises pour parser les fichiers CSV formatés avec des données contenants des séparateurs ou des guillemets.</p>
+
+
+<h4>Rappel: Les exceptions</h4>
+<p>Cette section revisite quelques concepts liés aux traitements des exceptions en Java et présente ceux qui sont  spécifiques aux traitements des entrées-sorties. </p>
+
+<h5>IOException</h5>
+<p>&ldquo;Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions  produced by failed or interrupted I/O operations.&rdquo; Cela signifie qu'une exception quelconque d'entrée ou sortie (I/O) s'est produite. Cette classe est la classe générale des exceptions pouvant se produire lors de l'échec ou l'interruption d'action d'entrée/sortie. <strong>IOException</strong> est une sous-classe d'<strong>Exception</strong>. Ces  exceptions doivent être traitées : à l'aide de blocs <strong>try/catch</strong> ou d'une déclaration. </p>
+<h5>FileNotFoundException</h5>
+<p>Le constructeur<strong> FileInputStream(String name)</strong> peut lancer une exception de type <strong>FileNotFoundException</strong> si le fichier <i>name</i> n'est pas trouvé.</p>
+<p>Revoyez les exercices précédents et ajoutez les blocs try/catch afin de traiter les exceptions déclarées (throws).<p> </p>
+<p>&nbsp;</p>
+        </div>
+					</div>
+					</div>
+    
+    
+ <!------------------------2nd part ------------------------------------>  
+ 
+    
+					<div class="bb-item" id="item2">
+						<div class="content">
+						<div class="scroller">
+<h1>Deuxième partie</h1> 
+
+<h2>Message secret</h2>
+<p>Pour cet exercice, vous développer une application qui vous permet d'échanger des messages secrets!</p>
+<p>Cette application devra lire le contenu d'un fichier texte, puis le chiffrer (crypter) afin qu’il ne soit plus compréhensible et sauvegarder le résultat dans un deuxième fichier. L’application utilisera une <strong>clé</strong> (un <strong>int</strong>) pour chiffrer le message. La méthode <strong>encrypt</strong> prend trois paramètres soit <strong>inputFile</strong>, <strong>outputFile</strong>, et <strong>key</strong>.  Ils sont respectivement le fichier duquel le message sera lu, le fichier où le message secret sera enregistré et la clé qui sera utilisée pour chiffrer le message. La méthode doit lire chaque lettre du fichier d’entrée, chiffrer l'information – pour le cryptage, nous allons ajouter la valeur de la clé à la valeur de la lettre (rappel, la méthode <strong>read()</strong> de <strong>InputStreamReader</strong> retourne une valeur de type <strong>int</strong>) – et écrire le résultat du cryptage dans un fichier de sortie.</p>
+
+<p>La méthode <strong>decrypt</strong> est semblable à la méthode <strong>encrypt</strong>. Par contre, vous devrez vous assurer de faire l’opération inverse par rapport à ce que vous avez fait pendant le cryptage avec la clé qui vous est fournie. Si la clé fournie n’est pas la  même que celle qui a été utilisée lors du cryptage, le résultat sera encore incompréhensible. </p>
+
+<p>Voici votre point de départ <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab9_template/SecretMessage.java"><strong>SecretMessage.java</strong> </a>:</p>
+<pre class="prettyprint lang-java"><code>import java.io.*;
+
+public class SecretMessage {
+
+    public static void encrypt( String inputFilem, String outputFile, int key ) throws IOException, FileNotFoundException {
+
+        InputStreamReader input = null;
+		OutputStreamWriter out = null;
+ 
+    }
+	
+	public static void decrypt( String inputFilem, String outputFile, int key ) throws IOException, FileNotFoundException {
+
+
+    }
+
+    public static void main( String[] args ) {
+
+        if ( args.length != 4 ) {
+            System.out.println( "Usage: java SecretMessage [encrypt|decrypt] inputFile OutputFile key" );
+            System.exit( 0 );
+        }
+
+		if(args[0].equals("encrypt")){
+
+		
+            try {
+                encrypt( args[1],args[2], Integer.parseInt(args[3]));
+            } catch ( FileNotFoundException e ) {
+                System.err.println( "File not found: "+e.getMessage() );
+            } catch (IOException e) {
+                System.err.println( "Cannot read/write file: "+e.getMessage() );
+            }
+		}
+		else if(args[0].equals("decrypt")){
+
+		
+            try {
+                decrypt( args[1],args[2], Integer.parseInt(args[3]));
+            } catch ( FileNotFoundException e ) {
+                System.err.println( "File not found: "+e.getMessage() );
+            } catch (IOException e) {
+                System.err.println( "Cannot read/write file: "+e.getMessage() );
+            }
+        }
+		else{
+			System.out.println( "Usage: java SecretMessage [encrypt|decrypt] inputFile OutputFile key" );
+            System.exit( 0 );
+		}
+        
+    }
+}
+
+
+
+  </code></pre>
+
+<p>Si le fichier <tt>input.txt</tt> contient le message suivant :</p>
+
+<pre class="prettyprint lang-java"><code>
+Here is my sercret message, can you decode it?
+  </code></pre>
+<p>À la suite de l’exécution de la commande suivante (notez que la clé est 3) :</p>
+<pre class="prettyprint lang-java"><code>
+>java SecretMessage encrypt input.txt secret.txt 3
+  </code></pre>
+
+<p>Le fichier <tt>secret.txt</tt> contiendra :</p>
+<pre class="prettyprint lang-java"><code>
+Khuh#lv#p|#vhufuhw#phvvdjh/#fdq#|rx#ghfrgh#lwB
+  </code></pre>
+
+<p>Si l’on essaie de décrypter le message en utilisant la mauvaise clé (disons 2)</p>
+<pre class="prettyprint lang-java"><code>
+>java SecretMessage decrypt secret.txt output.txt 2
+  </code></pre>
+<p>On obtient encore quelque chose d’incompréhensible dans le fichier output.txt. </p>
+<pre class="prettyprint lang-java"><code>
+Ifsf!jt!nz!tfsdsfu!nfttbhf-!dbo!zpv!efdpef!ju@
+  </code></pre>
+
+<p>Par contre, si on utilise la bonne clé comme ceci:</p>
+<pre class="prettyprint lang-java"><code>
+>java SecretMessage decrypt secret.txt output.txt 3
+  </code></pre>
+
+<p>On obtient cela dans le fichier output.txt</p>
+<pre class="prettyprint lang-java"><code>
+Here is my sercret message, can you decode it?
+  </code></pre>
+ <p></p>
+ <h3> Défi supplémentaire :</h3>
+<p>Vous noterez que si l’on utilise une clé qui est grande (quelques dizaines ou plus), l’application peut être défectueuse (ne pas retourner le bon message après le décryptage). Modifiez votre code pour pouvoir  utiliser n’importe quelle clé (rappelez-vous des valeurs que la méthode read() peut retourner).</p>
+
+         <p>&nbsp;</p>
+      </div>
+						</div>
+					</div>
+    
+    
+    
+    
+     <!------------------------3rd part ------------------------------------>   
+  
+					<div class="bb-item" id="item3">
+						<div class="content">
+						  <div class="scroller"> 
+<h1>Troisième partie </h1>
+
+<!-- <p><b>Section facultative: testez vos nouvelles connaissances!</b></p> -->
+
+<h2> PlayListManager</h2>
+
+<p>Pour ce laboratoire, vous devez modifier l'application PlayListManager afin de lire et écrire les chansons  dans des fichiers. </p>
+
+<h4>2.1 Lire les chansons à partir d'un fichier</h4>
+<p>Modifiez l'application afin de lire les chansons à partir d'un fichier. Par exemple, donnez le nom fichier sur la  ligne de commande, </p>
+<pre class="prettyprint lang-java"><code>> java Run songs.csv</code></pre>
+
+<p> Le fichier contient une entrée par ligne. Chaque entrée est composée du titre, du nom de l'artiste et du titre  de l'album. Les champs sont séparés par &ldquo; :&rdquo;. </p>
+<pre class="prettyprint lang-java"><code>A Dream Within A Dream:Alan Parsons Project:Tales Of Mystery & Imagination  
+Aerials:System Of A Down:Toxicity  
+Bullet The Blue Sky:U2:Joshua Tree  
+Clint Eastwood:Gorillaz:Clint Eastwood  
+Flood:Jars Of Clay:Jars Of Clay  
+Goodbye Mr. Ed:Tin Machine:Oy Vey, Baby  
+Here Comes The Sun:Nina Simone:Anthology  
+In Repair:Our Lady Peace:Spiritual Machines  
+In The End:Linkin Park:Hybrid Theory  
+Is There Anybody Out There?:Pink Floyd:The Wall  
+Karma Police:Radiohead:OK Computer  
+Le Deserteur:Vian, Boris:Titres Chansons D’auteurs  
+Les Bourgeois:Brel, Jacques:Le Plat Pays  
+Mosh:Eminem:Encore  
+Mosquito Song:Queens Of The Stone Age:Songs For The Deaf  
+New Orleans Is Sinking:Tragically Hip, The:Up To Here  
+Pour un instant:Harmonium:Harmonium  
+Sweet Dreams:Marilyn Manson:Smells Like Children  
+Sweet Lullaby:Deep Forest:Essence of the forest  
+Yellow:Coldplay:Parachutes</code></pre>
+
+
+<h4>2.2 Écrire les chansons dans un fichier</h4>
+<p>Modifiez l'application afin de sauvegarder les chansons de la nouvelle liste dans un fichier. Vous pouvez  spécifier le nom du fichier sur la ligne de commande, </p>
+
+<pre class="prettyprint lang-java"><code>> java Run songs.csv workout.csv</code></pre>
+
+<p> Le format du fichier est le même que celui en entrée. </p>
+
+<p>Il est fortement suggéré que vous développiez vos solutions des méthodes PlayList getSongsFromFile(  String fileName ) et void writeSongsToFile( String fileName ) dans une classe séparée, par exemple  Utils. Une fois le travail terminé, intégrez les méthodes à l'application PlayListManager. </p>
+<ul>
+  <li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab9_template/media.zip" target="_blank">media.zip</a> (point de départ) </li>
+  
+</ul>
+
+
+<p>&nbsp;</p>
+						</div>
+					</div>
+    
+
+					
+				</div>
+    
+    
+    
+ <!------------------------4rd part ------------------------------------>   
+  
+					<div class="bb-item" id="item4">
+						<div class="content">
+						  <div class="scroller"> 
+    <h1>Quatrième partie </h1>
+<h2>Exceptions</h2>
+<ul>
+  <li>Ajoutez  les  déclarations  d'exception  nécessaires  afin  de  résoudre  les  erreurs  de  compilation
+  
+  <pre class="prettyprint lang-java"><code>import java.io.*; 
+ 
+public class L9 { 
+ 
+    public static String cat(String fileName) { 
+ 
+        FileInputStream fin = new FileInputStream(fileName); 
+        BufferedReader input = new BufferedReader(new InputStreamReader(fin)); 
+        StringBuffer buffer = new StringBuffer(); 
+ 
+        String line = null; 
+ 
+        while ((line = input.readLine()) != null) { 
+            line = line.replaceAll("\\s+", " "); 
+            buffer.append(line); 
+        } 
+ 
+        fin.close(); 
+ 
+        return buffer.toString(); 
+    } 
+ 
+    public static void main(String[] args) { 
+        System.out.println(cat(args[0])); 
+    } 
+}</code></pre>
+  
+  
+     </li>
+</ul>
+
+
+<p> </p>
+<h4>Ressources</h4>
+<ul>
+  <li><a href="http://java.sun.com/docs/books/tutorial/essential/io/" target="_blank">java.sun.com/docs/books/tutorial/essential/io</a></li>
+  <!-- <li><a href="http://www.iro.umontreal.ca/%7Evaucher/Java/tutorials/Java_files.txt" target="_blank">www.iro.umontreal.ca/~vaucher/Java/tutorials/Java_files.txt</a></li> -->
+  <li><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Scanner.html" target="_blank">https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Scanner.html</a></li>
+</ul>
+
+<p>&nbsp;</p></div>
+						</div>
+					</div>
+
+<!------------------------5th part ------------------------------------>   
+  
+          <div class="bb-item" id="item5">
+            <div class="content">
+              <div class="scroller"> 
+    <h1>Cinquième partie </h1>
+
+
+    <h2>Créer et soumettre un fichier zip (1 point)</h2>
+
+    <h3>Directives</h3>
+
+    <ul>
+      <li>
+                    Créez un répertoire que vous
+                    nommerez <strong>lab9_123456</strong>,
+                    où vous remplacerez 123456 par votre numéro
+                    d'étudiant. Notez que le nom du répertoire est en
+                    minuscules, incluant la lettre «l».
+                  </li>
+      <li>
+                    Dans ce répertoire, placer les fichiers pour les
+                    exercices du laboratoire. N'y ajoutez que le code
+                    source, les fichiers .java. En particulier, ne
+                    soumettez pas les fichiers .class.
+                  </li>
+      <li>
+                    Dans ce répertoire, créez aussi un fichier texte
+                    nommé <strong>README.txt</strong>, qui devra
+                    contenir votre nom, numéro d'étudiant, ainsi
+                    qu'une brève description du contenu (en français
+                    ou en anglais, c'est votre choix) :
+        <pre>
+
+Nom de l'étudiante ou de l'étudiant: Paidge Beaulieu
+Numéro d'étudiant: 123456
+Code du cours: ITI1521
+Section de laboratoire: A02
+
+Cette archive contient les 7 fichiers du laboratoire 9.
+
+Spécifiquement, ce fichier (README.txt), ainsi que
+<strong>SecretMessage.java, PlayList.java, Song.java, SortByAlbum.java, SortByArtist.java, SortByName.java</strong>.
+
+                    </pre>
+      </li>
+      <li>
+                    Créez un fichier zip <strong>
+                    lab9_123456.zip</strong> à partir du répertoire <strong>lab9_123456</strong>.
+                  </li>
+      <li>
+                    Assurez-vous que cette archive comprend tous les
+                    fichiers nécessaires. Pour ce faire, copiez le
+                    fichier zip quelque part, ouvrez-le et
+                    assurez-vous que les fichiers et les répertoires
+                    espérés s'y trouvent.
+                  </li>
+      <li>
+                    Soumettez l'archive sur le site Web <a href="https://uottawa.brightspace.com/">https://uottawa.brightspace.com/</a>.
+                  </li>
+    </ul>
+
+<h4>Remarques importantes!</h4>
+Nous utilisons des scripts automatisés pour tester et évaluer votre soumission de laboratoire. Par conséquent, vous devez suivre ces instructions à la lettre. En particulier:
+<ul>
+<li>Les noms de tous les fichiers et méthodes doivent être exacts. Utilisez le code de démarrage fourni pour éviter des problèmes.</li>
+<li>Il faut soumettre un fichier .zip; pas de fichiers individuels; pas un .rar, pas un .7z, ni rien d’autre. </li>
+<li>Tous les fichiers de java doivent être présents et compiler avec succès (autrement dit, l’exécution de javac *.java ne doit générer aucune erreur), même si vous n’êtes pas capable de compléter un exercice. </li>
+<li>Notez si le code ne sera pas compilé en raison d'erreurs de syntaxe, vous n'obtiendrez pas de marque. Même si vous ne pouvez pas à résoudre complètement cet exercice, vous devez déposer un fichier contenant les méthodes intactes qui compilent correctement (vous pouvez mettre "return 0" si vous avez abandonné). </li>
+<li>Votre travail doit être soumis au plus tard à 23h30
+  le mardi de la semaine prochaine.</li>
+</ul>
+<h4>JUnits</h4>
+
+Pour vous assurer que votre code est correct, nous avons préparé quelques <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab9_template/JUnit09.zip">tests unitaires</a>.
+
+                <h4>Resources</h4>
+                <ul>
+                  <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/application/index.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/application/index.html</a></li>
+                  <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html</a></li>
+                  <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/cupojava/unix.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/cupojava/unix.html</a></li>
+                  <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/problems/index.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/problems/index.html</a></li>
+                </ul>
+
+<p>&nbsp;</p>
+
+
+
+              </div>
+            </div>
+          </div>
+ <!--End of submission part-->
+
+					
+				</div>
+				
+				<nav>
+					<span id="bb-nav-prev">&larr;</span>
+					<span id="bb-nav-next">&rarr;</span>
+				</nav>
+
+				<span id="tblcontents" class="menu-button">Table of Contents</span>
+
+			</div>
+				
+		</div><!-- /container -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script src="js/jquery.mousewheel.js"></script>
+		<script src="js/jquery.jscrollpane.min.js"></script>
+		<script src="js/jquerypp.custom.js"></script>
+		<script src="js/jquery.bookblock.js"></script>
+		<script src="js/page.js"></script>
+		<script>
+			$(function() {
+
+				Page.init();
+
+			});
+		</script>
+	</body>
+</html>

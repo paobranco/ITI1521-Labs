@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>ITI 1521 Laboratoire 8</title>
+		<meta name="description" content="ITI1521 labs" />
+		<meta name="keywords" content="fullscreen pageflip, booklet, layout, bookblock, jquery plugin, flipboard layout, sidebar menu" />
+		<link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.custom.css" />
+		<link rel="stylesheet" type="text/css" href="css/bookblock.css" />
+		<link rel="stylesheet" type="text/css" href="css/custom.css" />
+		<script src="js/modernizr.custom.79639.js"></script>
+		<script type="text/javascript" src="js/google-code-prettify/src/run_prettify.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/prettify.css"/>
+
+
+	</head>
+	<body>
+		<div id="container" class="container">	
+
+			<div class="menu-panel">
+				<h3>Table des matières</h3>
+				<ul id="menu-toc" class="menu-toc">
+					<li class="menu-toc-current"><a href="#item1">Partie 1</a></li>
+					<li><a href="#item2">Partie 2</a></li>
+					<li><a href="#item3">Partie 3</a></li>
+					<!--<li><a href="#item4">Partie 4</a></li>
+					<li><a href="#item5">Cinquième partie</a></li>-->
+				</ul>
+				<!--<div>
+					<a href="">some link here</a>
+					
+				</div>-->
+			</div>
+
+			<div class="bb-custom-wrapper">
+				<div id="bb-bookblock" class="bb-bookblock">
+    
+<!------------------------1st part ------------------------------------>  
+
+					<div class="bb-item" id="item1">
+						<div class="content">
+							<div class="scroller"> <h1>Première partie</h1>
+							  <div class="content_bullet_box objectifs_box">
+<h3>Objectifs d'apprentissage</h3>
+
+<ul>
+      <li><strong>Utiliser</strong> des files afin de résoudre des problèmes.</li>
+      <li><strong>Implémenter</strong> une file d'attente à l'aide de tableaux et des éléments chaînés.</li>
+</ul>
+</div>
+<h2>Introduction</h2> 
+<p>Il y a plusieurs applications des files dans la vie de tous les jours. Les files d'attente en sont un bon exemple. Afin  d'améliorer le service à la clientèle, les gestionnaires cherchent des techniques permettant de réduire le temps moyen  d'attente ou la longueur moyenne des files. Pour les compagnies aériennes, on a fait l'introduction de files d'attente séparées  pour les voyageurs adhérant à un programme de fidélité (<em>frequent flyers</em>), en plus des files normales. Pour les  supermarchés, nous avons fait l'ajout de files express, en plus des files normales. Ce sont là des façons de réduire le temps  d'attente. </p>
+<p> Cependant, les gestionnaires ont besoin d'outils leur permettant de comparer plusieurs scénarios afin d'améliorer  les services à moindres coûts. Ils doivent donc connaître le temps moyen d'attente pour chaque scénario. </p>
+<p> Il y a deux grandes approches permettant de déterminer ces statistiques. Une branche des mathématiques  (<em>Queueing theory</em>) étudie spécifiquement ces questions. L'approche alternative consiste à développer une  <strong>simulation informatique</strong> de ces systèmes et de mesurer les valeurs de certains paramètres à l'aide de la  simulation. </p>
+<p> Pour ce laboratoire, nous développons une simulation des files d'attente pour un supermarché ayant des files  express ainsi que des files normales. Les files d'attente seront modélisées à l'aide de files (objets réalisant l'interface  <strong>Queue</strong>). </p>
+
+<h3>Implémentation d'une file</h3> 
+
+<p>Avant tout, assurez-vous de bien comprendre l'implémentation d'une file. D'abord, nous verrons comment implémenter une file à l'aide d'un tableau.</p>
+
+<ul>
+  <li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab8_template/Queue.java">Queue.java</a></li>
+</ul>
+
+<h4>Les méthodes</h4> 
+
+<pre class="prettyprint lang-java"><code>public interface Queue&lt;E&gt; {
+
+    public abstract void enqueue( E obj );
+    public abstract E dequeue();
+    public abstract boolean isEmpty();
+    public abstract int size();
+
+}</code></pre>
+<ul>
+  <li><b>void enqueue</b>: ajouter un élément à l'arrière de la file</li>
+  <li><b>E dequeue</b>: retire et retourne l'élément au début de la file</li>
+  <li><b>boolean isEmpty</b>: retourne <i>true</i> si la file est vide, <i>false</i> autrement</li>
+  <li><b>int size</b>: retourne le nombre d'éléments dans la file</li>
+</ul>
+
+<h4>L'implémentation avec un tableau</h4> 
+
+<p>Une file doit toujours respecter le principe de <b>first in first out (FIFO)</b> (premier entré premier sorti). Vous remarquerez donc dans l'implémentation de ArrayQueue l'usage de <b>front</b> (devant) qui indique l’index du premier élément de la file (donc le prochain à sortir) ainsi que <b>rear</b> (arrière) indiquant l’index du dernier élément de la file (-1 si la file est vide). La variable <b>size</b> permet de conserver la taille réelle de notre file (n'oubliez pas que elems.length n'équivaut pas à size à moins que la file soit pleine!). Enfin, c'est dans un tableau <b>E elems[]</b> que les éléments de la file seront sauvegardés.</p>
+
+<ul>
+  <li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab8_template/ArrayQueue.java">ArrayQueue.java</a></li>
+</ul>
+
+<pre class="prettyprint lang-java"><code>1 public class ArrayQueue&lt;E&gt; implements Queue&lt;E&gt; {
+2
+3     // Constant
+4
+5     private static final int MAX_QUEUE_SIZE = 10000;
+6
+7     // Instance variables
+8
+9     private E[] elems; // stores the elements of this queue
+10    private int front, rear, size;
+11
+12    @SuppressWarnings( "unchecked" )
+13
+14    public ArrayQueue() {
+15        elems = (E []) new Object[MAX_QUEUE_SIZE];
+16        front =  0;
+17        rear = -1;
+18        size = 0;
+19    }
+20
+21    // Instance methods
+22
+23    public int size() {
+24        return size;
+25    }
+26
+27    public boolean isEmpty() {
+28        return size == 0;
+29    }
+30
+31    public boolean isFull() {
+32        return size == MAX_QUEUE_SIZE;
+33    }
+34    
+35    public void enqueue( E elem ) {
+36
+37        // pre-condition: ???
+38
+39        if ( rear == ( MAX_QUEUE_SIZE -1 ) ) {
+40            
+41            int j=0;
+42            for ( int i=front; i&lt;=rear; i++ ) {
+43                elems[ j++ ] = elems[ i ];
+44            }
+45
+46            front = 0;
+47            rear = size - 1;
+48
+49        }
+50
+51        elems[ ++rear ] = elem;
+52        size++;
+53    }
+54
+55    public E dequeue() {
+56
+57        // pre-condition: ???
+58
+59        E saved = elems[ front ];
+60        elems[ front ] = null; // scrubbing the memory!
+61
+62        front++;
+63        size--;
+64
+65        return saved;
+66    }
+67
+68 }</code></pre>
+
+<p><b>Remarque:</b> lorsque nous retirons l'élément à la position <b>front</b> du tableau dans la méthode <b>dequeue</b>, nous assignons en fait la valeur <b>null</b> à cet élément et incrémentons <b>front</b> afin que le prochain élément dans la file devienne le premier. Ceci cause donc un décalage dans le tableau où les premiers éléments sont <i>null</i> jusqu'à la position <b>front</b>. Lorsque le <b>tableau elems[]</b>
+ avec lequel nous implémentons notre file devient plein, il est fort probable qu'en réalité il y ait de l'espace dans les premières positions du tableau qui aurait pu être <b>dequeue</b>. Les <b>lignes 39 à 49</b> permettent donc de décaler ce tableau vers la gauche dans le cas où la variable <b>rear</b> aurait atteint la taille maximale du tableau!</p>
+
+<p>Prenez le temps de déterminer les pré-conditions de chacune des méthodes.</p>
+
+<h4>L'implémentation avec des éléments chaînés</h4> 
+<ul>
+  <li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab8_template/LinkedQueue.java">LinkedQueue.java</a></li>
+</ul>
+<pre class="prettyprint lang-java"><code>public class LinkedQueue&lt;E&gt; implements Queue&lt;E&gt; {
+
+    private static class Elem&lt;T&gt; {
+
+        private T value;
+        private Elem&lt;T&gt; next;
+
+        private Elem(T value, Elem&lt;T&gt; next) {
+            this.value = value;
+            this.next = next;
+        }
+    }
+
+    private Elem&lt;E&gt; front;
+    private Elem&lt;E&gt; rear;
+	private int size;
+
+	public LinkedQueue() {
+		size = 0;
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public void enqueue(E value) {
+        Elem&lt;E&gt; newElem;
+        newElem = new Elem&lt;E&gt;(value, null );
+
+        if (rear == null) {
+            front = rear = newElem;
+        } else {
+            rear.next = newElem;
+            rear = newElem;
+        }
+		size++;
+    }
+
+    public E dequeue() {
+        E result = front.value;
+        if (front != null && front.next == null) {
+            front = rear = null;
+        } else {
+            front = front.next;
+        }
+		size--;
+        return result;
+    }
+
+    public boolean isEmpty() {
+        return front == null;
+    }
+
+}</code></pre>
+
+
+<p>Cette implémentation diffère de celle vue précédemment. Nous utilisons cette fois 3 variables d'instance, soit <b>Elem front</b>, <b>Elem rear</b> et <b>int size</b>. Qu'est-ce que cet objet de type Elem? Il provient de la classe imbriquée statique privée <b>Elem</b> (private static class) dans laquelle sont sauvegardées la valeur réelle de l'élément de la file (un type T générique!) ainsi qu'une référence au prochain Elem de la file. Ainsi, <b>front</b> est une référence au premier <b>Elem</b> de la file, tandis que <b>rear</b> est le dernier <b>Elem</b> de la file.</p>
+<p><b>Réflexion:</b></p>
+<ul>
+  <li>Dans quel cas est-ce que front == rear?</li>
+  <li>La file peut-elle être pleine?</li>
+  <li>Sans la variable <b>size</b>, comment pourrions-nous déterminer la taille de notre file?</li>
+
+</ul>
+
+						  </div>
+					</div>
+					</div>
+    
+    
+ <!------------------------2nd part ------------------------------------>  
+ 
+    
+					<div class="bb-item" id="item2">
+						<div class="content">
+						<div class="scroller">
+<h1>Deuxième partie</h1> 
+<h2>Application d'une file à un problème de la vie courante</h2>
+<div id="img">
+<img id="figure_1" src="images/lab8_img1_supermarket-01.png" alt="Les principales classes de la simulation" title="Les principales classes de la simulation">
+<strong>Figure 1 : </strong>Les principales classes de la simulation. 
+</div>
+
+
+ <h3>Customer</h3>
+        <p>Vous devez concevoir une classe afin de modéliser un client. Un client mémorise le moment de son arrivée (une valuer int), le  nombre initial de produits (articles), ainsi que le nombre de produits qui n'ont pas encore été traités par le caissier.  Le nombre maximal d'articles est le même pour tous les clients (<strong>MAX_NUM_ITEMS</strong>). </p>
+        <ul>
+    <li>Quelles sont les <strong>variables d'instances</strong> ? </li>
+    <li>Quelles sont les <strong>variables de classes</strong> ?</li>
+        </ul>
+        <p>L'unique constructeur de cette classe n'a qu'un paramètre. Ce dernier spécifie l'heure à laquelle le client s'est joint à la  file. Pour le bien de cet exercice, le temps d'arrivée sera une variable de type <b>int</b> Le nombre initial d'articles est déterminé à l'aide de la formule suivante : </p>
+        
+        <pre class="prettyprint lang-java"><code>Random generator;  
+generator = new Random();  
+ 
+int numItems;  
+numItems = generator.nextInt(MAX_NUM_ITEMS-1)+1;</code></pre>
+
+
+        <p> Ainsi, nous nous assurons qu'il y ait au moins un (1) item. </p>
+        <p> Il y a aussi les méthodes d'instance suivantes : </p>
+        <ul>
+    <li><strong>int getArrivalTime() </strong>retourne l'heure d'arrivée ; </li>
+    <li><strong>int getNumberOfItems()</strong> retourne le nombre d'articles à traiter ; </li>
+    <li><strong>int getNumberOfServedItems()</strong> retourne le nombre total d'articles traités ; </li>
+    <li><strong>serve() </strong>décrémente de 1 le nombre d'articles de ce client.</li>
+        </ul>
+		
+<h3>Cashier</h3>
+
+<p>Un caissier traite une file de clients. Il sert un client à la fois. Puisque le but de cette simulation est d&rsquo;estimer la  valeur de certains paramètres, tel que le temps moyen d&rsquo;attente, le caissier doit aussi mémoriser certaines données  telles que le nombre de clients servis, le temps total passé dans la file d&rsquo;attente, ainsi que le nombre total d&rsquo;articles  traités. </p>
+<ul>
+  <li>Quelles sont les variables d&rsquo;instance ainsi que les variables de classe ?</li>
+</ul>
+<p>Cette classe n&rsquo;a qu&rsquo;un constructeur. Ce dernier n&rsquo;a aucun paramètre. Il sert à initialiser les variables d&rsquo;instance de ce  caissier. </p>
+<p> La méthode <strong>addCustomer(Customer c)</strong> ajoute un client à l&rsquo;arrière de la file. La méthode <strong>int  getQueueSize()</strong> retourne le nombre de clients qui attendent présentement. </p>
+<p> La méthode <strong>serveCustomers(int currentTime)</strong> est un élément clé de la simulation. La méthode  <strong>serveCustomers</strong> de chaque caissier est appelée exactement une fois par itération. Le paramètre <strong>currentTime</strong> servira à déterminer le temps total qui s&rsquo;est écoulé depuis que le client a joint la file. Voici le comportement du  caissier. </p>
+<ul>
+  <li>Si le caissier n&rsquo;a pas de clients courants, le prochain client en file devient le client courant, sauf si la file est vide, auquel cas, le caissier sera inactif pour cette itération. Lorsqu&rsquo;un client est retiré de la file, il faut comptabiliser le temps total passé à attendre ; </li>
+  <li>Le caissier traite un article (appel à la méthode <strong>serve()</strong> du client courant) ; </li>
+  <li>Si tous les articles du client courant ont été traités, le caissier comptabilise le nombre total d&rsquo;articles traités. Il laisse son client partir (ce caissier n&rsquo;a plus de client courant).</li>
+</ul>
+<p> Il y a aussi 3 méthodes d&rsquo;instances qui donnent accès aux statistiques de ce caissier : temps total passé en file,  nombre total d&rsquo;articles traités, ainsi que le nombre total de clients servis : <strong>int getTotalCustomerWaitTime()</strong>,  int <strong>getTotalItemsServed()</strong>, et <strong>int getTotalCustomersServed()</strong>. Finalement, la méthode String toString()  retourne une chaîne de caractères qui présente les statistiques accumulées par ce caissier. </p>
+<p>Voici les fichiers requis pour votre file de clients.</p>
+<ul>
+  <li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab8_template/Queue.java">Queue.java</a></li>
+  <li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab8_template/ArrayQueue.java">ArrayQueue.java</a></li>
+</ul>
+<h3>Simulation</h3>
+<ul>
+  <li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab8_template/Simulation.java">Simulation.java</a></li>
+</ul>
+<p>La classe <strong>Simulation</strong> orchestre la simulation. Un objet <strong>Simulation</strong> à deux caissiers, l&rsquo;un est responsable de la file  express, l&rsquo;autre s&rsquo;occupe d&rsquo;une normale. Cet objet mémorise aussi la durée de la simulation. Le constructeur crée les  deux caissiers nécessaires. </p>
+<p> La méthode <strong>run()</strong> réalise la boucle principale de la simulation. Au début, l&rsquo;horloge est mise à 0, pour chaque  itération, l&rsquo;horloge avance d&rsquo;une quantité fixe (TICK). </p>
+<p> À chaque itération, la méthode <strong>run()</strong> doit : </p>
+<ul>
+  <li>Déterminer si un nouveau client est arrivé, et si oui, le placer la bonne file, selon le nombre d&rsquo;articles achetés ; </li>
+  <li>S&rsquo;assurer que tous les caissiers traitent un client ; </li>
+  <li>Incrémenter la valeur de temps.</li>
+</ul>
+<p> À la fin de la simulation, la méthode affiche les statistiques. </p>
+<ol>
+  <li id="x1-5002x1">Exécutez la simulation plusieurs fois. Discutez vos observations avec vos voisins.Voici un exemple de sortie : 
+  
+  <pre class="prettyprint lang-java"><code>SIMULATION ::  
+The duration (in seconds) of the simulation was 28800  
+ 
+EXPRESS LINE ::  
+The total number of customers served is 376  
+The average number of items per customer was 6  
+The average waiting time (in seconds) was 16  
+ 
+REGULAR LINE ::  
+The total number of customers served is 311  
+The average number of items per customer was 18  
+The average waiting time (in seconds) was 2597</code></pre>
+  </li>
+  <li id="x1-5004x2">Hum, comme vous pouvez le constater le temps moyen d&rsquo;attente pour la file express est très court (16 secondes !). Cependant, le temps d&rsquo;attente à la file normale est très long (près de 45 minutes !). Le gérant du supermarché devra ajouter de nouvelles files, mais combien ? Afin de l&rsquo;aider avec sa prise de décision, vous devez modifier ces classes afin d&rsquo;y ajouter des caisses normales ; </li>
+  <li id="x1-5006x3">Si le temps le permet, faites plusieurs expériences où vous allez varier les paramètres de la simulation, changer la probabilité de l&rsquo;arrivée d&rsquo;un client, le nombre maximal d&rsquo;articles, ainsi que le nombre de caisses, express ou normales.</li>
+</ol>
+<p>&nbsp;</p>
+						</div>
+						</div>
+					</div>
+    
+ <!------------------------3rd part ------------------------------------>   
+  
+					<div class="bb-item" id="item3">
+						<div class="content">
+						  <div class="scroller"> 
+    <h1>Troisième partie </h1>
+
+
+    <h2>Créer et soumettre un fichier zip (1 point)</h2>
+
+    <h3>Directives</h3>
+
+    <ul>
+      <li>
+                    Créez un répertoire que vous
+                    nommerez <strong>lab8_123456</strong>,
+                    où vous remplacerez 123456 par votre numéro
+                    d'étudiant. Notez que le nom du répertoire est en
+                    minuscules, incluant la lettre «l».
+                  </li>
+      <li>
+                    Dans ce répertoire, placer les fichiers pour les
+                    exercices du laboratoire. N'y ajoutez que le code
+                    source, les fichiers .java. En particulier, ne
+                    soumettez pas les fichiers .class.
+                  </li>
+      <li>
+                    Dans ce répertoire, créez aussi un fichier texte
+                    nommé <strong>README.txt</strong>, qui devra
+                    contenir votre nom, numéro d'étudiant, ainsi
+                    qu'une brève description du contenu (en français
+                    ou en anglais, c'est votre choix) :
+        <pre>
+
+Nom de l'étudiante ou de l'étudiant: Paidge Beaulieu
+Numéro d'étudiant: 123456
+Code du cours: ITI1521
+Section de laboratoire: A02
+
+Cette archive contient les 5 fichiers du laboratoire 8.
+
+Spécifiquement, ce fichier (README.txt), ainsi que
+<strong>Queue.java, ArrayQueue.java, Customer.java, Cashier.java</strong>.
+
+                    </pre>
+      </li>
+      <li>
+                    Créez un fichier zip <strong>
+                    lab8_123456.zip</strong> à partir du répertoire <strong>lab8_123456</strong>.
+                  </li>
+      <li>
+                    Assurez-vous que cette archive comprend tous les
+                    fichiers nécessaires. Pour ce faire, copiez le
+                    fichier zip quelque part, ouvrez-le et
+                    assurez-vous que les fichiers et les répertoires
+                    espérés s'y trouvent.
+                  </li>
+      <li>
+                    Soumettez l'archive sur le site Web <a href="https://uottawa.brightspace.com/">https://uottawa.brightspace.com/</a>.
+                  </li>
+    </ul>
+
+<h4>Remarques importantes!</h4>
+Nous utilisons des scripts automatisés pour tester et évaluer votre soumission de laboratoire. Par conséquent, vous devez suivre ces instructions à la lettre. En particulier:
+<ul>
+<li>Les noms de tous les fichiers et méthodes doivent être exacts. Utilisez le code de démarrage fourni pour éviter des problèmes.</li>
+<li>Il faut soumettre un fichier .zip; pas de fichiers individuels; pas un .rar, pas un .7z, ni rien d’autre. </li>
+<li>Tous les fichiers de java doivent être présents et compiler avec succès (autrement dit, l’exécution de javac *.java ne doit générer aucune erreur), même si vous n’êtes pas capable de compléter un exercice. </li>
+<li>Notez si le code ne sera pas compilé en raison d'erreurs de syntaxe, vous n'obtiendrez pas de marque. Même si vous ne pouvez pas à résoudre complètement cet exercice, vous devez déposer un fichier contenant les méthodes intactes qui compilent correctement (vous pouvez mettre "return 0" si vous avez abandonné). </li>
+<li>Votre travail doit être soumis au plus tard à 23h30
+  le mardi de la semaine prochaine.</li>
+</ul>
+<h4>JUnits</h4>
+
+Pour vous assurer que votre code est correct, nous avons préparé quelques <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab8_template/JUnit08.zip">tests unitaires</a>.
+
+                <h4>Resources</h4>
+                <ul>
+                  <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/application/index.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/application/index.html</a></li>
+                  <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html</a></li>
+                  <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/cupojava/unix.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/cupojava/unix.html</a></li>
+                  <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/problems/index.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/problems/index.html</a></li>
+                </ul>
+
+<p>&nbsp;</p>
+
+
+
+						  </div>
+						</div>
+					</div>
+    
+
+					
+				</div>
+				
+				<nav>
+					<span id="bb-nav-prev">&larr;</span>
+					<span id="bb-nav-next">&rarr;</span>
+				</nav>
+
+				<span id="tblcontents" class="menu-button">Table of Contents</span>
+
+			</div>
+				
+		</div><!-- /container -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script src="js/jquery.mousewheel.js"></script>
+		<script src="js/jquery.jscrollpane.min.js"></script>
+		<script src="js/jquerypp.custom.js"></script>
+		<script src="js/jquery.bookblock.js"></script>
+		<script src="js/page.js"></script>
+		<script>
+			$(function() {
+
+				Page.init();
+
+			});
+		</script>
+	</body>
+</html>

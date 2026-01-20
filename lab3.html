@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Laboratoire 3</title>
+		<meta name="description" content="ITI1521 labs" />
+		<meta name="keywords" content="fullscreen pageflip, booklet, layout, bookblock, jquery plugin, flipboard layout, sidebar menu" />
+		<!-- <link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.custom.css" /> -->
+		<link rel="stylesheet" type="text/css" href="css/bookblock.css" />
+		<link rel="stylesheet" type="text/css" href="css/custom.css" />
+		<script src="js/modernizr.custom.79639.js"></script>
+		<script type="text/javascript" src="js/google-code-prettify/src/run_prettify.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/prettify.css"/>
+
+
+	</head>
+	<body>
+		<div id="container" class="container">
+
+			<div class="menu-panel">
+				<h3>Table des matières</h3>
+				<ul id="menu-toc" class="menu-toc">
+					<li class="menu-toc-current"><a href="#item1">Partie 1</a></li>
+					<li><a href="#item2">Partie 2</a></li>
+					<li><a href="#item3">Partie 3</a></li>
+					<li><a href="#item4">Partie 4</a></li>
+					<li><a href="#item5">Partie 5</a></li>
+				</ul>
+				<!--<div>
+					<a href="">some link here</a>
+
+				</div>-->
+			</div>
+
+			<div class="bb-custom-wrapper">
+				<div id="bb-bookblock" class="bb-bookblock">
+
+<!------------------------1st part ------------------------------------>
+
+					<div class="bb-item" id="item1">
+						<div class="content">
+							<div class="scroller"> <h1>Première partie</h1>
+<h2>Encore des types références</h2>
+
+<div class="content_bullet_box objectifs_box">
+
+  <h3>Objectifs d'apprentissage</h3>
+
+<ul>
+   <li><strong>Distinguer</strong> « == » et « equals ».</li>
+  <li><strong>Manipuler </strong>des tableaux et des références.</li>
+</ul>
+</div>
+
+
+                <h4>La méthode <strong>equals</strong></h2>
+
+                <p>
+                  Comme vous le savez, la
+                  classe <strong>Object</strong> déclare une
+                  méthode <strong><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object->equals</a></strong>.
+                </p>
+
+                <pre class="prettyprint lang-java">
+                  <code>
+public class Object {
+
+    // ...
+
+    public boolean equals(Object obj) {
+        return this == other;
+    }
+
+}</code>
+                </pre>
+
+                <p>
+                  Puisqu'en Java, toutes les classes héritent des
+                  caractéristiques de la
+                  classe <strong>Object</strong>. Toutes les classes
+                  possèdent donc une méthode <strong>boolean
+                    equals(Object obj)</strong>. C'est vrai pour les
+                  classes prédéfinies, mais aussi pour toutes les
+                  classes que l'on crée soi-même.
+                </p>
+
+                <p>
+                  On utilise la méthode <strong>equals</strong> afin
+                  de comparer les objets désignés par
+                  des <strong>variables références</strong>.  Étant
+                  donné deux variables référence <strong>a</strong>
+                  et <strong>b</strong>, et les objets désignés:
+                </p>
+                <ul>
+                  <li>
+                    Pour comparer l'identité des objets (est-ce
+                    que <strong>a</strong> et <strong>b</strong>
+                    désignent le même objet ou non?), on utilise
+                    l'opérateur de comparaison «<strong>==</strong>»
+                    (donc «<strong>a == b</strong>»);
+                  </li>
+                  <li>
+                    Pour comparer le <strong>contenu</strong> des
+                    deux objets (est-ce que
+                    le <strong>contenu</strong> des objets désignés
+                    est logiquement équivalent?), on utilise la
+                    méthode «<strong>equals</strong>»
+                    (donc <strong>a.quals(b)</strong>).
+                  </li>
+                </ul>
+
+
+
+<h4>1 FindAndReplace</h4>
+<p>Complétez l'implémentation de la méthode de classe (static) <strong>String[] findAndReplace(String[] in,  String[] what, String[] with)</strong> de la classe <strong>Utils</strong>. Cette méthode retourne une <u>copie</u> du tableau désigné par  la référence <strong>in</strong> où tous les mots se trouvant le tableau désigné par <strong>what</strong> ont été remplacés par le mot se  trouvant à la même position dans le tableau <strong>with</strong>. Le tableau désigné par <strong>in</strong> demeure <u>inchangé</u> par un appel  à la méthode. Il n'y a pas des doublons dans le tableau <strong>what</strong>.
+</p>
+
+<p> Plus tard, nous traiterons les exceptions. Il s'agit d'un formalisme pour le traitement d'erreurs. En  attendant, la méthode <strong>findAndReplace</strong> retourne la valeur <strong>null</strong> lorsque l'un de ces préalables n'est pas  rencontré:</p>
+<ul>
+	<li> En particulier, la valeur des paramètres formels ne peut être <strong>null</strong>.</li>
+    <li>La valeur des éléments des  tableaux ne peut être <strong>null</strong>.</li>
+    <li>Les tableaux désignés par les références <strong>what</strong> et <strong>with</strong> doivent être de même  longueur.
+    </li>
+</ul>
+<p>Vous allez soumettre cet exercice.  Téléchargez et complétez le fichier de démarrage ici: <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab3_template/Utils.java">Utils.java</a>.</p>
+
+         <p>&nbsp;</p>
+     </div>
+					</div>
+					</div>
+
+
+ <!------------------------2nd part ------------------------------------>
+
+
+					<div class="bb-item" id="item2">
+						<div class="content">
+						<div class="scroller">
+<h1>Deuxième partie</h1>
+<h2>Validation de programmes à l’aide de tests</h2>
+<div class="content_bullet_box objectifs_box">
+<h3>Objectifs d'apprentissage</h3>
+
+<ul>
+   <li>Utiliser des tests prédéfinis</li>
+</ul>
+</div>
+<h3>Tests</h3>
+<p>
+  Bien que les tests démontrent la présence et non l'absence
+  d'erreurs («<i>testing shows the presence, not the absence of
+  bugs</i>» - Edsger W. Dijkstra), la validation des programmes est
+  une activité importante du développement de logiciels.
+</p>
+<p> Les tests sont une partie essentielle du développement de logiciels. Il est donc important de se familiariser à les utiliser. Bien qu’il soit possible de tester de petits programmes manuellement, plus votre programme est complexe, plus l’utilisation de test automatique est importante. Le principe des tests automatiques est de créer un bloc de code —un test— qui interagit avec votre programme en effectuant un ou plusieurs scénarios possibles dont on connait la réponse logique, et de s’assurer que la réponse de notre programme correspond à la réponse logique que l’on s’attend à obtenir.  Il existe certains outils qui peuvent vous aider à tester votre code tel que JUnit.</p>
+<p>Utilisez la classe de test TestFindAndReplace.java pour tester votre programme. </p>
+<ul>
+  <li><a href="http://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab3_template/TestFindAndReplace.java">TestFindAndReplace.java</a></li>
+</ul>
+<p>Effectuez tous les changements nécessaires afin que la méthode  <strong>findAndReplace</strong> passe tous les tests.</p>
+    <p>&nbsp;</p>
+					</div>
+						</div>
+					</div>
+
+ <!------------------------3rd part ------------------------------------>
+
+					<div class="bb-item" id="item3">
+						<div class="content">
+							<div class="scroller">
+    <h1>Troisième partie </h1>
+<h2>Encore des objets</h2>
+ <div class="content_bullet_box objectifs_box">
+<h3>Objectifs d'apprentissage</h3>
+
+<ul>
+  <li>Approfondir les notions liées à la programmation orientée objet </li>
+    <li>Résoudre des problèmes à l'aide de Java</li>
+</ul>
+</div>
+   <h3>3. Rational</h3>
+	 <p>Vous allez soumettre cet exercice.  Téléchargez et complétez le fichier de démarrage ici: <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab3_template/Rational.java">Rational.java</a>.</p>
+   <p>Vous devez implémenter une classe <strong>Rational</strong> afin de représenter des nombres rationnels. Un nombre rationnel comporte  un numérateur et un dénominateur, tous deux de type <strong>int</strong>. Puisque chaque nombre possède son propre numérateur et dénominateur, ces variables sont des variables d'instance. De plus, nous prenons la bonne habitude de déclarer ces variables privées. </p>
+
+   <h4>3.1 Constructeurs</h4>
+   <p>La class <strong>Rational </strong>possède deux constructeurs. L'un d'eux a deux paramètres formels, dont les valeurs  servent pour l'initialisation des variables d'instance. L'autre constructeur n'a qu'un paramètre, il s'agit du numérateur ; la valeur du dénominateur est alors 1. </p>
+
+   <h4>3.2 Méthodes d'accès</h4>
+   <p>Implémentez des méthodes d'accès « getters », en lecture seulement, afin de retourner la valeur du numérateur et la  valeur du dénominateur respectivement. Un objet qui n'a pas de méthodes d'accès en écriture, « setters », et aucune autre méthode afin de changer l'état de l'objet, est dit immuable. C'est une propriété fort intéressante. Discutez-en avec vos voisins et votre démonstrateur. </p>
+
+   <h4>3.3 plus</h4>
+   <p>Implémentez la méthode d'instance <strong>plus</strong>. Cette méthode n'a qu'un paramètre formel, de type <strong>Rational</strong>. La  méthode retourne un nouvel objet <strong>Rational</strong> qui représente la somme de l'objet rational « this » avec celui passé en paramètre. </p>
+
+   <h4>3.4 plus (partie 2)</h4>
+   <p>Implémentez la méthode de classe <strong>plus</strong>. Cette méthode possède deux paramètres formels, tous les deux de type <strong>Rational</strong>. La méthode retourne un nouvel objet représentant la somme des deux valeurs. </p>
+
+   <h4>3.5 gcd</h4>
+   <p>Implémentez une méthode de classe privée afin de calculer le <b>plus grand diviseur commun</b> de deux nombres passés en paramètres. </p>
+
+   <h4>3.6 reduce</h4>
+   <p>Implémentez une méthode d'instance privée que vous nommerez <strong>reduce</strong> et qui transforme cette instance en sa forme réduite. (ex: 18/4 -&gt; 9/2) </p>
+
+   <h4>3.7 reduce (partie 2)</h4>
+   <p>Effectuez les changements nécessaires pour que la classe sauvegarde toujours le nombre rationnel sous sa forme réduite.</p>
+
+   <h4>3.8 equals</h4>
+   <p>Implémentez la méthode d'instance <strong>public boolean equals( Rational o)</strong> qui retourne vrai si cette fraction et celle désignée par le paramètre représentent la même fraction au sens logique, et faux sinon. </p>
+
+   <h4>3.9 toString</h4>
+   <p>Implémentez une méthode <strong>public String toString()</strong> qui retourne une chaîne de caractères représentant  cette fraction. Le format sera numérateur suivi de « / » suivi du dénominateur, ou encore, simplement le  numérateur, si le dénominateur est 1.</p>
+
+   <h4>3.10 compareTo</h4>
+   <p>Implémentez la méthode d'instance <strong>int compareTo( Rational o)</strong>. Celle-ci compare cet objet (this) et celui désigné par le paramètre « o » et retourne un entier négatif, si cette fraction est plus petite que celle désignée par le paramètre, 0 si elles sont égales, et un entier positif sinon.</p>
+
+        <p>&nbsp;</p>
+    			 </div>
+						</div>
+					</div>
+
+<!------------------------4th part ------------------------------------>
+
+
+					<div class="bb-item" id="item4">
+						<div class="content">
+						<div class="scroller">
+<h1>Quatrième partie</h1>
+<h2>Documentation : JavaDoc</h2>
+<div class="content_bullet_box objectifs_box">
+<h3>Objectifs d'apprentissage</h3>
+
+<ul>
+  <li>Expliquer en vos propres mots JavaDoc </li>
+    <li>Représenter vos commentaires à l'aide de JavaDoc </li>
+    <li>Produire des pages Web à partir de spécifications JavaDoc</li>
+</ul>
+</div>
+<p>La documentation des programmes est une autre activité importante. JavaDoc est un ensemble de règles pour  les commentaires de vos programmes et un ensemble d'outils afin de produire des pages Web.  En ITI1521, nous vous demandons de commenter tous vos programmes (variables, méthodes,  etc.) à l'aide de <strong>JavaDoc</strong>.</p>
+
+<p>La documentation JavaDoc est une série de commentaires avec une syntaxe spéciale. Ces commentaires JavaDoc sont une description du programme ou d’une méthode et commencent par « /** », toutes les lignes suivantes commencent par « * », et le bloc de commentaire est ferme avec « */ ». Si l’on veut changer de paragraphe, on utilise « &lt;p&gt; ». </p>
+<p>Une fois la description finie, on doit utiliser les « block tags », les tags commencent par le symbole « @ ».  Il existe plusieurs tags, mais nous allons nous concentrer sur ceux si :</p>
+<ul>
+<li><strong>@author</strong> : indique l’auteur du code</li>
+<li><strong>@param</strong> : dois être suivi du nom d’un paramètre de la méthode à laquelle il est relié, puis d’une description de ce paramètre</li>
+<li><strong>@return</strong> : est suivi d’une description de ce que retourne la méthode</li>
+</ul>
+<p>Pour plus d’information, veuillez consulter la documentation de <a href="http://www.oracle.com/technetwork/articles/java/index-137868.html">JavaDoc</a></p>
+
+<p>Exemple :</p>
+
+<pre class="prettyprint lang-java"><code>
+/**
+* this class represents a person
+* &lt;p&gt;
+* <b>Note:</b> Giving proper comments in your program makes it more
+* user friendly and it is assumed as a high quality code.
+*
+* @author  Bob Smith
+*/
+public class Person {
+       private String firstName;
+       private String lastName;
+       private String username;
+       [...]
+
+        /**
+        * Constructor method initializing the first and last name.
+        * Sets the default value for the username as "firstName.lastName".
+        *@param firstName The first name of the person
+        *@param lastName The last name of the person
+        */
+      public Person(String firstName, String lastName){
+          //no code before this call
+          this(firstName, lastName, firstName + "." + lastName);
+          //possibly more code here
+       }
+        /**
+        * Constructor method initializing the first name, last name and the username.
+        *@param firstName The first name of the person
+        *@param lastName The last name of the person
+        *@param username The preferred username of the person
+        */
+      public Person(String firstName, String lastName, String username){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+      }
+        /**
+        *this is a getter method
+        *it is used to get the value of the variable firstName
+        *@return String this returns the person's first name
+        */
+      public String getFirstName(){
+          return firstName; //Here we do not need to use "this"
+        }
+        /**
+        *this is a setter method
+        *it is used to change the value of the variable firstName
+        *@param firstName The value to assign to the instance variable firstName
+        */
+        public void setFirstName(String firstName){
+          this.firstName = firstName; //Here we need to use the keyword "this"
+        }
+  }
+  </code></pre>
+
+<p> Vous devez ajouter des commentaires en format JavaDoc au fichier Utils.java. </p>
+<ol>
+  <li id="x1-20002x1">Documentez la méthode<strong> findAndReplace</strong> à l'aide de la syntaxe <strong>JavaDoc</strong>. Il doit y avoir une brève description de la méthode, des paramètres, ainsi que de la valeur de retour, et ce, à l'aide de la syntaxe JavaDoc. </li>
+  <li id="x1-20004x2">Commentez la classe Utils à l'aide de la syntaxe JavaDoc, assurez-vous d'y inclure le nom de l'auteur de la classe (vous).</li>
+</ol>
+<p>Produisez des fichiers HTML automatiquement, soit à l'aide de votre environnement de programmation favori  (DrJava, Eclipse, Netbeans, etc.), ou encore à l'aide de la commande javadoc dans un shell, les paramètres  sont -d doc suivi d'une liste de fichiers sources à traiter : </p>
+
+<pre class="prettyprint lang-java"><code>&gt; javadoc -d doc Utils.java</code></pre>
+
+<p>Lorsqu’il y a plusieurs fichiers à traiter simultanément, utilisez * à la place des noms de fichiers.</p>
+
+<pre class="prettyprint lang-java"><code>&gt; javadoc -d doc *</code></pre>
+
+          <p>&nbsp;</p>
+
+      			</div>
+						</div>
+					</div>
+
+					<div class="bb-item" id="item5">
+          						<div class="content">
+          							<div class="scroller">
+
+					<h1>Cinquième partie</h1>
+          <h2>Créer et soumettre un fichier zip (1 point)</h2>
+
+          <h4>Directives</h4>
+
+          <ul>
+            <li>Créez un répertoire que vous nommerez <strong>lab3_123456</strong>, où vous remplacerez 123456 par votre numéro d'étudiant. Notez que le nom du répertoire est en minuscules, incluant la lettre «l».</li>
+            <li>Dans ce répertoire, placer les fichiers pour les exercices <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab3_template/Utils.java">Utils</a> and <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab3_template/Rational.java">Rational</a>.  N'y ajoutez que le code source, les fichiers .java. En particulier, ne soumettez pas les fichiers .class. </li>
+            <li>Dans ce répertoire, créez aussi un fichier texte nommé <strong>README.txt</strong>, qui devra contenir votre nom, numéro d'étudiant, ainsi qu'une brève description du contenu (en français ou en anglais, c'est votre choix) :
+          <pre class="prettyprint lang-java"><code>
+Nom d'etudiant(e): Marc Tremblay
+Numero d'etudiant: 123456
+Code de cours: ITI1121
+Section de lab: B-2
+
+Cette archive contient les 3 fichiers de lab 3, c'est-à-dire, ce fichier (README.txt),
+puis les fichiers Utils.java et Rational.java.</code></pre>
+            </li>
+            <li>Créez un fichier <strong>zip lab3_123456.zip</strong> à partir du répertoire <strong>lab3_123456</strong>. </li>
+            <li>Assurez-vous que cette archive comprend tous les fichiers nécessaires. Pour ce faire, copiez le fichier zip quelque part, ouvrez-le et assurez-vous que les fichiers et les répertoires espérés s'y trouvent. </li>
+            <li>Soumettez l'archive sur <a href="https://uottawa.brightspace.com/">https://uottawa.brightspace.com/</a></li>
+          </ul>
+<h4>Remarques importantes!</h4>
+Nous utilisons des scripts automatisés pour tester et évaluer votre soumission de laboratoire. Par conséquent, vous devez suivre ces instructions à la lettre. En particulier:
+<ul>
+<li>Les noms de tous les fichiers et méthodes doivent être exacts. Utilisez le code de démarrage fourni pour éviter des problèmes.</li>
+<li>Il faut soumettre un fichier .zip; pas de fichiers individuels; pas un .rar, pas un .7z, ni rien d’autre. </li>
+<li>Tous les fichiers de java doivent être présents et compiler avec succès (autrement dit, l’exécution de javac *.java ne doit générer aucune erreur), même si vous n’êtes pas capable de compléter un exercice. </li>
+<li>Notez si le code ne sera pas compilé en raison d'erreurs de syntaxe, vous n'obtiendrez pas de marque. Même si vous ne pouvez pas à résoudre complètement cet exercice, vous devez déposer un fichier contenant les méthodes intactes qui compilent correctement (vous pouvez mettre "return 0" si vous avez abandonné). </li>
+<li>Votre travail doit être soumis au plus tard à 23h30
+  le mardi de la semaine prochaine.</li>
+</ul>
+<h4>JUnits</h4>
+
+Pour vous assurer que votre code est correct, nous avons préparé quelques <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab3_template/JUnit.zip">tests unitaires</a>. Consultez le fichier Readme.txt dans le fichier zip pour obtenir des informations supplémentaires.
+
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/application/index.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/application/index.html</a></li>
+            <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html</a></li>
+            <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/cupojava/unix.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/cupojava/unix.html</a></li>
+            <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/problems/index.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/problems/index.html</a></li>
+          </ul>
+
+          						</div>
+          						</div>
+          					</div>
+
+          				</div>
+
+				<nav>
+					<span id="bb-nav-prev">&larr;</span>
+					<span id="bb-nav-next">&rarr;</span>
+				</nav>
+
+				<span id="tblcontents" class="menu-button">Table of Contents</span>
+
+			</div>
+
+		</div><!-- /container -->
+		<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
+                <script src="js/jQuery.js"></script>
+		<script src="js/jquery.mousewheel.js"></script>
+		<script src="js/jquery.jscrollpane.min.js"></script>
+		<script src="js/jquerypp.custom.js"></script>
+		<script src="js/jquery.bookblock.js"></script>
+		<script src="js/page.js"></script>
+		<script>
+			$(function() {
+
+				Page.init();
+
+			});
+		</script>
+	</body>
+</html>

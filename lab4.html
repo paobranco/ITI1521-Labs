@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Fullscreen Pageflip Layout with BookBlock</title>
+		<meta name="description" content="ITI1521 labs" />
+		<meta name="keywords" content="fullscreen pageflip, booklet, layout, bookblock, jquery plugin, flipboard layout, sidebar menu" />
+		<!--<link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.custom.css" />-->
+		<link rel="stylesheet" type="text/css" href="css/bookblock.css" />
+		<link rel="stylesheet" type="text/css" href="css/custom.css" />
+		<script src="js/modernizr.custom.79639.js"></script>
+		<script type="text/javascript" src="js/google-code-prettify/src/run_prettify.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/prettify.css"/>
+
+    <script type="text/javascript">
+      <!--
+	  function toggle(id) {
+	  var e = document.getElementById(id);
+	  if(e.style.display == 'none')
+	  e.style.display = 'block';
+	  else
+	  e.style.display = 'none';
+	  }
+	  //-->
+    </script>
+
+
+	</head>
+	<body>
+		<div id="container" class="container">
+
+			<div class="menu-panel">
+				<h3>Table des matières</h3>
+				<ul id="menu-toc" class="menu-toc">
+					<li class="menu-toc-current"><a href="#item1">Partie 1</a></li>
+					<li><a href="#item2">Partie 2</a></li>
+					<li><a href="#item3">Partie 3</a></li>
+					<!--<li><a href="#item4">A drawing joke</a></li>
+					<li><a href="#item5">Commencing practice</a></li>-->
+				</ul>
+				<!--<div>
+					<a href="">some link here</a>
+
+				</div>-->
+			</div>
+
+			<div class="bb-custom-wrapper">
+				<div id="bb-bookblock" class="bb-bookblock">
+					<div class="bb-item" id="item1">
+						<div class="content">
+						  <div class="scroller"> <h1>Première partie</h1>
+
+<div class="content_bullet_box objectifs_box">
+<h3>Objectifs d'apprentissage</h3>
+
+<ul>
+          <li><strong>Appliquer</strong> le concept d'héritage pour concevoir une application.</li>
+          <li><strong>Concevoir</strong> une classe qui réalise une interface.</li>
+</ul>
+</div>
+<p></p>
+
+<h2>1 - Héritage et polymorphisme</h2>
+
+<ul>
+	<li>Une classe (enfant) est dite <b>dérivée</b> d'une autre <b>si elle hérite</b> de cette classe (mère).</li>
+	<li>Le mot clé <b>extends</b> est utilisé pour signifier qu'une classe hérite de la classe spécifiée.</li>
+	<li>Lorsqu'une classe est dérivée d'une autre, elle peut accéder toutes les <b>méthodes</b> ou <b>variables d'instance</b> déclarées <b>public</b> ou <b>protected</b>.</li>
+	<!-- <li>L'héritage fait usage du <b>polymorphisme</b>. Il est possible d'appeler une méthode de la classe mère avec le mot clé <b>super</b>.</li> -->
+
+</ul>
+
+<p>Le mot <b>polymorphisme</b> provient de « poly » qui signifie « plusieurs » et « morphes » qui signifie « formes ». En Java, le <b>polymorphisme</b> signifie qu'une <b>instance d'une classe</b> (un objet) peut être utilisée comme si elle avait plusieurs types, ayant ainsi de <b>nombreux comportements</b>. Par plusieurs types, on entend ici qu'elle <b>dérive</b> d'une autre classe ou d'autres interfaces.</p>
+
+<h2>2 - Les interfaces</h2>
+
+<p>Vous pouvez utiliser les <b>interfaces</b> en Java afin de démontrer le principe de polymorphisme.</p>
+
+<pre class="prettyprint lang-java"><code>public interface GreetingsInterface{
+
+    // An interface cannot contain an implementation
+    // of the method, only the signature.
+    
+    public void sayGreetings();
+}</code></pre>
+
+<p>Vous pouvez déclarer des constantes (<b>static</b> et <b>final</b>) dans une interface, mais en général, il ne s'agit <b>pas
+d'une pratique recommandée</b>. Nous essayons plutôt d'éviter de mettre des constantes dans les interfaces.</p>
+
+<p>Les <b>méthodes</b> doivent <b>être implémentées</b> par les classes <b>avant</b> qu'il soit possible de les accéder. Notez que <b>toutes</b> les <b>méthodes</b> d'une interface sont <b>publiques</b>, et ce,
+même si vous omettez de mettre le mot clé « public ».</p>
+
+<p>Pour faire usage d'une interface, vous devez <b>implémenter</b> (« implement ») cette dernière dans une <b>classe Java</b>.</p>
+
+<pre class="prettyprint lang-java"><code>// The key word implements signals to the compiler
+// that the SpanishGreetings class implements the
+// GreetingsInterface interface
+public class SpanishGreetings implements GreetingsInterface{
+
+    // A class that implements an interface must implement
+    // all the methods declared in the interface
+    public void sayGreetings() {
+
+        // The class does not need to implement (declare)
+        // the variables of an interfaceWhat gets printed to the console after executing the method main?
+        System.out.println("Hola");
+    }
+}
+
+public class JapaneseGreetings implements GreetingsInterface{
+    public void sayGreetings() {
+        System.out.println(“Konnichiwa”);
+    }
+}</code></pre>
+
+<p>Lorsqu'une classe <b>réalise</b> une <b>interface</b>, vous pouvez
+  déclarer une <b>variable référence</b> dont le type est nom de
+  l'<b>interface</b> (une variable référence dont le type est le nom
+  de l'interface désigne un objet dont la classe réalise cette
+  interface). Voici un exemple d'une méthode <b>main</b> : </p>
+
+<pre class="prettyprint lang-java"><code>public static void main(String[] args){
+// The variable is declared of interface type GreetingsInterface,
+// the object created is of type SpanishGreetings.
+    
+GreetingsInterface myGreetings;
+myGreetings = new SpanishGreetings();
+myGreetings.sayGreetings();
+
+// The variable is declared of interface type GreetingsInterface,
+// the object created is of type JapaneseGreetings.
+
+myGreetings = new JapaneseGreetings();
+myGreetings.sayGreetings();
+}</code></pre>
+
+<div id="question21">
+<p><b>Question 2.1 :</b></p>
+<p>Qu'est-ce qui sera imprimé sur la console lors de l'exécution de la méthode main?</p>
+<a href="#" onclick="toggle('ans21');">	Réponse</a></div>
+  <div style="display:none" id="ans21">
+<pre class="prettyprint lang-java"><code>Hola
+Konnichiwa</code></pre></div>
+
+<p>Si on omet d'implémenter une méthode faisant partie de l'interface, nous obtiendrons un message d'erreur. Repronons l'exemple ci-haut, mais cettre fois <b>SpanishGreetings</b> n'implémente pas la méthode <b>sayGreetings()</b>.</p>
+
+<pre class="prettyprint lang-java"><code>public class SpanishGreetings implements GreetingsInterface{
+    /*public void sayGreetings() {
+        System.out.println(GreetingsInterface.greetings);
+    }*/
+}</code></pre>
+
+<p>À la compilation de la classe <b>SpanishGreetings</b>, nous obtiendrons alors:</p>
+
+<pre class="prettyprint lang-java"><code>SpanishGreetings.java:1: error:
+SpanishGreetings is not abstract and does not override abstract method sayGreetings() in GreetingsInterface
+public class SpanishGreetings implements GreetingsInterface{
+       ^
+1 error
+</code></pre>
+
+<p>Le message d'erreur nous mentionne que nous n'avons <b>pas redéfinit</b> la <b>méthode abstraite sayGreetings()</b> dans <b>GreetingsInterface</b>. Encore une fois, nous
+vous rappelons l'importance de <b>bien lire</b> les messages d'erreurs. Ces derniers sont toujours précis sur la nature de votre erreur.</p>
+
+<p>Par ailleurs, une<b> classe</b> peut réaliser (implémenter) <b>plusieurs interfaces</b> en Java.
+
+<pre class="prettyprint lang-java"><code>public interface PartingsInterface{
+    public void sayPartings();
+}
+
+// List the names of the interfaces
+// to implement separated by a comma.
+public class SchwarzeneggerPhrases implements GreetingInterface, PartingsInterface{
+
+	public void sayGreeting() {
+		System.out.println("I’ll be back");
+	}
+
+	// The class must still implement all the
+	// methods declared in all the interfaces
+	public void sayParting() {
+		System.out.println("Hasta la vista");
+	}
+
+	public static void main(String[] args){
+
+		GreetingsInterface myGreetings = new SchwarzeneggerPhrases();
+		myGreetings.sayGreetings();
+
+		PartingsInterface myPartings = new SchwarzeneggerPhrases();
+		myPartings.sayPartings();
+	}
+}
+</code></pre>
+
+<div id="question22">
+<p><b>Question 2.2: </b></p>
+<p>Qu'est-ce qui sera imprimé à la console?</p>
+<a href="#" onclick="toggle('ans22');">	Réponse</a></div>
+  <div style="display:none" id="ans22">
+<pre class="prettyprint lang-java"><code>I’ll be back
+Hasta la vista</code></pre></div>
+
+
+<p>Il est possible pour une <b>interface</b> d'hériter d'une <b>autre interface</b> tout comme les classes peuvent hériter d'une autre. Vous utiliserez le même mot clé « <b>extends</b> » pour déclarer que votre interface dérive d'une autre.
+Contrairement aux classes, les <b>interfaces</b> peuvent dériver de <b>multiples</b> « superinterface ». Pour ce faire, vous devez énumérer chacune des <b>interfaces mères</b> en les séparant par des <b>virgules</b>. Voici un exemple simple d'héritage multiple d'une interface:</p>
+
+<pre class="prettyprint lang-java"><code>// TalkingInterface inherits all field and methods
+// from GreetingsInterface and PartingsInterface .
+public interface TalkingInterface extends GreetingsInterface, PartingsInterface {
+	public void sayItAll();
+}
+
+// A class implementing an interface which inherits
+// from multiple interfaces must implement all methods
+// from the interface and its superinterfaces
+public class HamletTalking implements TalkingInterface {
+
+	public void sayGreetings() {
+		System.out.println("To be or not to be");
+	}
+
+	public void sayPartings() {
+		System.out.println("That is the question");
+	}
+
+	public void sayItAll() {
+		sayGreetings();
+		sayPartings();
+	}
+
+	// We create an instance of HamletTalking in main method
+	public static void main(String[] args){
+		TalkingInterface myTalking = new HamletTalking();
+		myTalking.sayItAll();
+	}
+}</code></pre>
+
+<div id="question23">
+<p><b>Question 2.3 : </b></p>
+<p>Qu'est-ce qui sera imprimé à la console lors de l'exécution de HamletTalking?</p>
+<a href="#" onclick="toggle('ans23');">	Réponse</a></div>
+  <div style="display:none" id="ans23">
+<pre class="prettyprint lang-java"><code>To be or not to be
+That is the question</code></pre></div>
+
+<h4>En bref: </h4>
+
+<ul>
+	<li>Une interface ne contient que des <b>méthodes abstraites</b>. Une méthode est abstraite si elle ne possède pas d'implémentation.</li>
+	<li>Le mot clé <b>implements</b> est utilisé pour signifier qu'une classe réalise une interface donnée.</li>
+	<li>Lorsqu'une classe réalise une interface, il s'agit en
+	quelque sorte d'un <b>contrat</b> à l'effet que la classe devra implémenter <b>chacune des méthodes</b> de l'interface.</li>
+	<li>Vous ne pouvez <b>pas créer une instance d'une
+	interface</b>. Vous devez créer créer une instance de la
+	classe qui implémente cette interface et référencer cette
+	instance à une variable référence dont le type est le nom de l'interface.</li>
+	<li>Une <b>classe</b> peut réaliser (« implements ») plusieurs <b>interfaces</b></li>
+	<li>Une <b>interface</b> peut étendre (« extends ») plusieurs <b>interfaces</b></li>
+</ul>
+<p></p>
+
+<h2>3 - Les « super » classes</h2>
+
+<p>Le mot clé « super » est utilisé pour appeler le constructeur, les méthodes et les propriétés de la classe parent. Si votre méthode remplace (« override ») l'une des méthodes de sa <b>super classe</b>, vous pouvez quand même appeler la méthode remplacée, et ce, en utilisant le mot-clé « <b>super</b> ».
+ Voici des exemples de l'utilisation du mot clé : </p>
+
+<ul>
+	<li><b>super ()</b> appelle le constructeur de la <b>classe parent</b> sans arguments</li>
+	<li><b>super (argument1)</b> est un appel au constructeur de la classe parent qui accepte 1 paramètre du <b>type</b> de « argument1 » (notez que ce constructeur doit exister).</li>
+	<li><b>super</b> peut être utilisé pour appeler les <b>méthodes</b> de la classe parent à savoir <b>super.aMethod ()</b></li>
+	<li><b>super</b> peut être utilisé pour utiliser les <b>variables</b> de la classe parent à savoir super.aVariable</li>
+</ul>
+
+<p><b>Important</b>: si l'on veut faire un appel au contructeur de la méthode parent « super() » doit être appelé comme <b>première instruction</b> du constructeur de la classe enfant.</p>
+
+<p>Regardez l'exemple ci-dessous dans lequel <b>Frog</b> est dérivé (« extends ») de la classe <b>Animal</b> et fait deux types de bruit, « Ribbit » et « Bark ».</p>
+
+<pre class="prettyprint lang-java"><code>public class Animal {
+	protected final String noise;
+
+	protected Animal() {
+		this.noise = "silent";
+	}
+
+	protected Animal(String noise) {
+		this.noise = noise;
+	}
+
+	public void makeNoise() {
+		System.out.println(noise);
+	}
+}
+
+public class Frog extends Animal {
+	private final String noise;
+	public Frog() {
+
+		// constructor call super() must be the
+		// first statement in a constructor
+		super("Ribbit"); // call parent constructor
+
+		super.makeNoise(); // call parent method
+
+		this.noise = "Bark";
+
+		// call parent variable and compare to class variable
+		if (!super.noise.equals(this.noise)) {
+			makeNoise(); // call class method
+		}
+	}
+
+	public void makeNoise() {
+		System.out.println(noise);
+	}
+}</code></pre>
+
+
+
+
+<div id="question3">
+<p> Question 3 : </p>
+<p>Si vous créez un nouvel objet de la classe <b>Frog</b>, qu'est-ce qui sera imprimé sur la console?</p>
+<a href="#" onclick="toggle('ans3');">	Réponse</a></div>
+  <div style="display:none" id="ans3">
+<pre class="prettyprint lang-java"><code>Ribbit
+Bark</code></pre></div>
+
+          <p>&nbsp;</p>
+      </div>
+						</div>
+					</div>
+			<!------------------------2nd part ------------------------------------>
+
+
+
+
+    	<div class="bb-item" id="item2">
+						<div class="content">
+						  <div class="scroller">
+
+<h2>Exercise</h2>
+
+	 <p>Vous allez soumettre cet exercice.  Téléchargez et complétez le fichier de démarrage ici: <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab4_template/lab4_template.zip">lab4_template.zip</a>.</p>
+
+<p>La compagnie <i>Gazouillis</i> veut implémenter un logiciel pour échanger des messages textes et des
+photos. On vous demande de créer l’implémentation initiale qui sera montrée aux investisseurs de la
+compagnie.</p>
+
+<p>Le diagramme de classes UML ci-dessous donne une vue d’ensemble de l’application. Suivez les
+instructions suivantes :</p>
+
+<div id="img" >
+  <img id="figure_01" src="images/lab4_img1_NewsFeed2.png" alt="UMLdiargram " title="Diagramme UML de l'application NewsFeed" >
+  <strong>Figure 1 : </strong>Diagramme UML de l'application NewsFeed</div>
+
+<h3>1- Likeable</h3>
+	<p>Concevez <b>l’interface Likeable</b>. L’interface déclare deux méthodes : <b>like()</b> et <b>int getLikes()</b>.</p>
+
+<h3>2- Post</h3>
+
+<p>Écrivez l’implémentation de la <b>classe Post</b>. Elle implémente toutes les caractéristiques
+qui sont communes à ses sous-classes, soit <b>TextPost</b> et <b>PhotoPost</b>. </p>
+		<ul>
+			<li><b>Post</b> réalise l’<b>interface Likeable</b>.</li>
+			<li>Tous les <b>Post</b> ont un <b>nom d’utilisateur</b>, une <b>étiquette de temps</b> (time stamp) (de
+			type java.util.Date), en plus d’un <b>compteur</b> pour garder le nombre de « likes ».</li>
+			<li>La valeur de l’étiquette de temps est <b>automatiquement assignée</b> lorsqu’un objet est crée. Utilisez
+			« java.util.Calendar.getInstance().getTime() » pour obtenir un objet Date représentant
+			le temps actuel. L’objet Date a une méthode toString() qui convertit la date en une chaîne
+			de caractères (String).
+			<pre class="prettyprint lang-java"><code>Date rightNow = Calendar.getInstance().getTime();
+System.out.println(rightNow);</code></pre></li>
+			<li>Chaque appel à la <b>méthode like()</b> incrémente le nombre de « likes » pour ce message.</li>
+			<li><b>Post </b>réalise l’<b>interface Comparable</b>. Cette interface vous permettra de comparer deux <b>Post</b> selon un critère choisi. Dans notre cas, il s'agira de la <b>date</b> de la publication. Pour davatange d'information sur cette interface, référez-vous à la <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html">documentation</a>.</li>
+			<!--<li><b>Post </b>a une méthode <b>tagAFriend()</b> qui permet d'identifier un ami dans le Post.</li>-->
+			<li>Ajoutez une méthode nommée <b>isPopular()</b>. Cette méthode retourne <i>true</i> si la publication est considérée populaire (plus de 100 likes), <i>false</i> autrement.</li>
+			<li>N'oubliez pas la méthode <b>toString()</b>!</li>
+
+		</ul>
+
+<h3>3- PhotoPost</h3>
+
+	<p>Donnez l’implémentation de la <b>classe PhotoPost</b>. La classe PhotoPost est <b>dérivée de la classe
+	Post</b>. Cette classe utilise deux variables d’instance afin de sauvegarder le <b>nom du fichier</b> et la
+	<b>légende</b>. Surdéfinissez la méthode <b>toString()</b> en faisant usage du mot clé « super » dans votre implémentation.</p>
+
+<h3>4- TextPost</h3>
+<p>Donnez l’implémentation de la <b>classe TextPost</b>. Cette dernière est <b>dérivée de la classe Post</b>. Elle <b>sauvegarde un message texte</b> (String). Surdéfinissez aussi la méthode <b>toString()</b> en faisant usage du mot clé « super » dans votre implémentation. Un <b>TextPost</b> est pour sa partconsidéré <b>populaire</b> si la publication a plus de <b>50 likes</b>.</p>
+
+<h3>5- NewsFeed</h3>
+
+<p>Donnez l’implémentation de la <b>classe NewsFeed</b>. Un objet NewsFeed sauvegarde un ensemble d’objets de type Post.</p>
+<ul>
+	<li>Le <b>constructeur</b> ne reçoit aucun paramètre. Il doit initialiser un <b>tableau de taille fixe</b> d'une taille constante <strong>MAX_SIZE</strong> pour <b>sauvegarder les messages Post</b>. Pour cette implémentation accepter jusqu'à <b>25</b> messages Post.</li>
+	<li>Cette classe a une méthode <b>add</b> pour <b>ajouter un message Post</b>. Le message doit être ajouté <b>à la suite</b> du dernier message ajouté.</li>
+	<li>Elle a une méthode <b>sort</b> qui classe les <b>Post</b> au sein du <b>NewsFeed</b> du plus ancien au plus récent.</li>
+	<li>Elle a une méthode <b>Post get(int index)</b> qui <b>retourne le message</b> trouvé à l’index donné.</li>
+	<li>Elle a une méthode <b>size</b> qui retourne le <b>nombre de messages actuellement</b> sauvegardés.</li>
+	<li>Elle a une méthode <b>getPhotoPost</b> qui retourne un nouvel objet de type <b>NewsFeed</b> contenant <b>uniquement les PhotoPost</b> sauvegardés.</li>
+	<li>Elle a une méthode d'instance <b>plus</b> qui n'a qu'un paramètre formel, de type <b>NewsFeed</b>. La méthode retourne un nouvel objet <b>NewsFeed</b> qui représente la combinaison des deux <b>NewsFeed</b>. Les <b>Post</b> du <b>NewsFeed</b> doivent être classés du plus ancien au plus récent dans le nouveau NewsFeed.</li>
+</ul>
+<h3>Bonus</h3>
+<ul>
+	<li>L’implémentation de la <b>classe NewsFeed</b> utilise maintenant un <b>tableau dynamique</b> (tableau adapté automatiquement selon la taille des donnéees)
+		pour <b>sauvegarder les messages Post</b>, au lieu d'utiliser un tableau de taille fixe.</li>
+	<li>Le constructeur prend deux paramètres, la <b>capacité initiale du tableau</b> et l’<b>incrément de la capacité</b>, c'est-à-dire le nombre de nouveaux messages que l'on veut ajouter à la taille du tableau plein précédent.</li>
+	<li>Chaque fois que le tableau est plein, l’implémentation doit <b>créer un nouveau tableau</b> dont la taille sera déterminée par l’incrément (taille du nouveau tableau = taille de l'ancien tableau + incrément). Utiliser une méthode <b>increaseSize</b> qui sera appelée à chaque fois que le tableau est plein.</li>
+</ul>
+
+<p>Ajoutez tous les constructeurs nécessaires. Chaque attribut (variable d'instance) doit avoir un accesseur (getter). </p>
+
+<p>Voici un programme principal pour illustrer l’usage des classes de cette application. Adaptez-le afin de bien tester vos fonctionnalités. <strong>Ne soumettez pas cet fichier (NewsFeedMainApplication.java) !</strong></p>
+<ul>
+  <li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab4_template/NewsFeedMainApplication.java">NewsFeedMainApplication.java</a></li>
+</ul>
+
+      <p>&nbsp;</p>
+
+ </div>
+						</div>
+					</div>
+
+					<div class="bb-item" id="item3">
+											<div class="content">
+												<div class="scroller">
+
+					<h1>Troisième partie</h1>
+          <h2>Créer et soumettre un fichier zip (1 point)</h2>
+
+          <h4>Directives</h4>
+
+          <ul>
+            <li>Créez un répertoire que vous nommerez <strong>lab4_123456</strong>, où vous remplacerez 123456 par votre numéro d'étudiant. Notez que le nom du répertoire est en minuscules, incluant la lettre «l».</li>
+            <li>Dans ce répertoire, placer les fichiers pour les exercices du laboratoire.  N'y ajoutez que le code source, les fichiers .java. En particulier, ne soumettez pas les fichiers .class. </li>
+            <li>Dans ce répertoire, créez aussi un fichier texte nommé <strong>README.txt</strong>, qui devra contenir votre nom, numéro d'étudiant, ainsi qu'une brève description du contenu (en français ou en anglais, c'est votre choix) :
+          <pre class="prettyprint lang-java"><code>
+Nom d'étudiant(e): Marc Tremblay
+Numero d'étudiant: 123456
+Code de cours: ITI1121
+Section de lab: B-2
+
+Cette archive contient les 6 fichiers de lab 4, c'est-à-dire, ce fichier (README.txt),
+puis les fichiers Likeable.java, Post.java, TextPost.java, PhotoPost.java, NewsFeed.java.</code></pre>
+            </li>
+            <li>Créez un fichier <strong>zip lab4_123456.zip</strong> à partir du répertoire <strong>lab4_123456</strong>. </li>
+            <li>Assurez-vous que cette archive comprend tous les fichiers nécessaires. Pour ce faire, copiez le fichier zip quelque part, ouvrez-le et assurez-vous que les fichiers et les répertoires espérés s'y trouvent. </li>
+            <li>Soumettez l'archive sur <a href="https://uottawa.brightspace.com/">https://uottawa.brightspace.com/</a></li>
+          </ul>
+<h4>Remarques importantes!</h4>
+Nous utilisons des scripts automatisés pour tester et évaluer votre soumission de laboratoire. Par conséquent, vous devez suivre ces instructions à la lettre. En particulier:
+<ul>
+<li>Les noms de tous les fichiers et méthodes doivent être exacts. Utilisez le code de démarrage fourni pour éviter des problèmes.</li>
+<li>Il faut soumettre un fichier .zip; pas de fichiers individuels; pas un .rar, pas un .7z, ni rien d’autre. </li>
+<li>Tous les fichiers de java doivent être présents et compiler avec succès (autrement dit, l’exécution de javac *.java ne doit générer aucune erreur), même si vous n’êtes pas capable de compléter un exercice. </li>
+<li>Notez si le code ne sera pas compilé en raison d'erreurs de syntaxe, vous n'obtiendrez pas de marque. Même si vous ne pouvez pas à résoudre complètement cet exercice, vous devez déposer un fichier contenant les méthodes intactes qui compilent correctement (vous pouvez mettre "return 0" si vous avez abandonné). </li>
+<li>Votre travail doit être soumis au plus tard à 23h30
+  le mardi de la semaine prochaine.</li>
+</ul>
+<h4>JUnits</h4>
+
+Pour vous assurer que votre code est correct, nous avons préparé quelques <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab4_template/JUnit04.zip">tests unitaires</a>. Consultez le fichier Readme.txt dans le fichier zip pour obtenir des informations supplémentaires.
+
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/application/index.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/application/index.html</a></li>
+            <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html</a></li>
+            <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/cupojava/unix.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/cupojava/unix.html</a></li>
+            <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/problems/index.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/problems/index.html</a></li>
+          </ul>
+
+          						</div>
+          						</div>
+          					</div>
+
+          				</div>
+
+				<nav>
+					<span id="bb-nav-prev">&larr;</span>
+					<span id="bb-nav-next">&rarr;</span>
+				</nav>
+
+				<span id="tblcontents" class="menu-button">Table of Contents</span>
+
+			</div>
+
+		</div><!-- /container -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        		<script src="js/jquery.mousewheel.js"></script>
+		<script src="js/jquery.jscrollpane.min.js"></script>
+		<script src="js/jquerypp.custom.js"></script>
+		<script src="js/jquery.bookblock.js"></script>
+		<script src="js/page.js"></script>
+		<script>
+			$(function() {
+
+				Page.init();
+
+			});
+		</script>
+	</body>
+</html>
