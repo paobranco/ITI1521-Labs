@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+
+<html lang="fr" class="no-js">
+  <head>
+    <title>ITI 1121 Laborary 5</title>
+
+    <meta charset="UTF-8" />
+
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />  -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ITI 1121 1521 Laboratory" />
+    <meta name="keywords" content="fullscreen pageflip, booklet, layoutnx, bookblock, jquery plugin, flipboard layout, sidebar menu" />
+
+    <link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.custom.css" />
+    <link rel="stylesheet" type="text/css" href="css/bookblock.css" />
+    <link rel="stylesheet" type="text/css" href="css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="css/prettify.css"/>
+
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+    <script src="js/modernizr.custom.79639.js"></script>
+    <script src="js/google-code-prettify/src/run_prettify.js"></script>
+    <!--
+    <script type="text/javascript">
+      function toggle(id) {
+      var e = document.getElementById(id);
+      if(e.style.display == 'none')
+      e.style.display = 'block';
+      else
+      e.style.display = 'none';
+      }
+    </script>
+    //-->
+
+  </head>
+  <body>
+    <div id="container" class="container">
+
+      <div class="menu-panel">
+
+	<h3>Table des matières</h3>
+
+	<ul id="menu-toc" class="menu-toc">
+	  <li class="menu-toc-current"><a href="#item1">Partie 1</a></li>
+	  <li><a href="#item2">Partie 2</a></li>
+	  <li><a href="#item3">Partie 3</a></li>
+	</ul>
+
+	<!--
+        <div>
+	  <a href="">some link here</a>
+	</div>
+        -->
+
+      </div>
+
+      <div class="bb-custom-wrapper">
+	<div id="bb-bookblock" class="bb-bookblock">
+
+          <!-- 1st part -->
+
+	  <div class="bb-item" id="item1">
+	    <div class="content">
+	      <div class="scroller">
+
+                <h1>Première partie</h1>
+
+		<div class="content_bullet_box objectifs_box">
+
+                  <h3>Objectifs d'apprentissages</h3>
+
+                  <ul>
+ 	            <li><strong>Créer</strong> soi-même une méthode <strong>equals(Object o)</strong></li>
+                    <li><strong>Implémenter</strong> un type paramétré, ici une interface</li>
+                    <li><strong>Utiliser</strong> l'interface <strong>java.util.Comparator&lt;T&gt;</strong></li>
+                  </ul>
+                </div>
+
+                <h2>Section 1: la méthode <strong>equals</strong></h2>
+
+                <p>
+                  Comme vous le savez, la
+                  classe <strong>Object</strong> déclare une
+                  méthode <strong><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object->equals</a></strong>.
+                </p>
+
+                <pre class="prettyprint lang-java">
+                  <code>
+public class Object {
+
+    // ...
+
+    public boolean equals(Object obj) {
+        return this == other;
+    }
+
+}</code>
+                </pre>
+
+                <p>
+                  Puisqu'en Java, toutes les classes héritent des
+                  caractéristiques de la
+                  classe <strong>Object</strong>. Toutes les classes
+                  possèdent donc une méthode <strong>boolean
+                    equals(Object obj)</strong>. C'est vrai pour les
+                  classes prédéfinies, mais aussi pour toutes les
+                  classes que l'on crée soi-même.
+                </p>
+
+                <p>
+                  On utilise la méthode <strong>equals</strong> afin
+                  de comparer les objets désignés par
+                  des <strong>variables références</strong>.  Étant
+                  donné deux variables référence <strong>a</strong>
+                  et <strong>b</strong>, et les objets désignés:
+                </p>
+                <ul>
+                  <li>
+                    Pour comparer l'identité des objets (est-ce
+                    que <strong>a</strong> et <strong>b</strong>
+                    désignent le même objet ou non?), on utilise
+                    l'opérateur de comparaison «<strong>==</strong>»
+                    (donc «<strong>a == b</strong>»);
+                  </li>
+                  <li>
+                    Pour comparer le <strong>contenu</strong> des
+                    deux objets (est-ce que
+                    le <strong>contenu</strong> des objets désignés
+                    est logiquement équivalent?), on utilise la
+                    méthode «<strong>equals</strong>»
+                    (donc <strong>a.quals(b)</strong>).
+                  </li>
+                </ul>
+
+                <p>
+                  Pour cette première partie, vous devez créer la
+                  classe <strong>Book</strong>. Son implémentation est
+                  très simple. Voici les éléments que vous devrez
+                  intégrer:
+                </p>
+                <ul>
+                  <li>
+                    Une variable d'instance <strong>author</strong>
+                    de type <strong>String</strong>;
+                  </li>
+                  <li>
+                    Une variable d'instance <strong>title</strong>
+                    de type <strong>String</strong>;
+                  </li>
+                  <li>
+                    Une variable d'instance <strong>year</strong>
+                    de type <strong>int</strong> (l'année de publication
+                    du livre);
+                  </li>
+                  <li>
+                    Un contructeur <strong>Book(String author, String title, int year)</strong>,
+                    qui reçoit en paramètre l'auteur, le titre,
+                    l'année de publication;
+                  </li>
+                  <li>
+                    Une méthode <strong>toString()</strong>, qui
+                    retourne une chaîne de caractère ayant le format suivant:
+                    «<i>author: title (year)</i>;
+                  </li>
+                  <li>
+                    Une méthode <strong>equals(Object o)</strong>.
+                  </li>
+                </ul>
+
+                <p>
+                  Votre implémentation doit être robuste. En
+                  particulier, une méthode <strong>equals</strong>
+                  ne devrait jamais produire une erreur
+                  d'exécution. Les objets sont logiquement équivalents
+                  ou ils ne le sont pas.
+                </p>
+
+                <div id="question1.1">
+
+                  <h5>Question 1.1:</h5>
+
+                  <p>
+                    Implémentez la classe <strong>Book</strong>.
+                    Utilisez le
+                    <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab5_template/Book.java">gabarit
+                      fourni</a> comme point de départ.
+                  </p>
+
+                </div>
+
+                <h2>Section 2: l'interface <strong>java.util.Comparator&lt;T&gt;</strong></h2>
+
+                <p>
+
+                  Pour votre dernier laboratoire, vous avez utilisé
+                  l'interface <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html"> Comparable </a> pour creér 
+                  des objets de la classe <strong>Post</strong>. Un objet qui implémente cette interface doit redéfinir la méthode  <strong>compareTo</strong> et ainsi être capable de se comparer à un autre objet.
+                </p>
+                <p>
+                  Contrairement à Comparable, une classe implémentant l'interface <strong> Comparator </strong> est externe au type d'élément que nous comparons. Une telle classe doit implémenter les méthodes <strong> compare </strong> et <strong> equals </strong> pour définir et imposer l'ordre de tri.
+
+                </p>
+
+                <p>
+                  Ainsi, la méthode <strong>sort</strong> de la
+                  classe <strong> <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html#sort-java.util.List-java.util.Comparator-">Collections.sort</a> </strong> or <strong><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#sort-T:A-java.util.Comparator-">Arrays.sort</a></strong> utilisera la
+                  méthode <strong>compare</strong> du comparateur
+                  (objet réalisant
+                  l'interface <strong>Comparator</strong>). Il nous
+                  faut donc une méthode <strong>compare</strong> qui
+                  puisse traiter le type d'éléments se trouvant dans
+                  la liste (objet de la
+                  classe <strong>ArrayList</strong>, par example).
+                </p>
+
+                <p>
+                  Puisque <strong>Comparator</strong> est une
+                  interface, il lui faut une implémentation
+                  concrète.
+                </p>
+
+                <p> Notez que la
+                  classe <strong>ArrayList</strong> possède un
+                  paramètre de type. Pour ce laboratoire, nous déclarons des
+                  variables de
+                  type  <strong>ArrayList&lt;Book&gt;</strong>.
+                  Ainsi, l'instance ne reçoit que des objets de la
+                  classe <strong>Book</strong>. Du coup, la
+                  méthode <strong>sort</strong> doit recevoir un
+                  comparateur pour des objets de la
+                  classe <strong>Book</strong>. Ainsi, <strong>BookComparator</strong> réalisent
+                  l'interface
+                  <strong>Comparator&lt;Book&gt;</strong>. Le grand
+                  avantage de cette structure de programme, c'est que
+                  l'on peut comparer les objets selon plusieurs
+                  critères (par author, par title, par year) et donc trier les
+                  éléments en fonctions de critères variés.
+                </p>
+
+                <p>Vous devez créer une
+                  classe <strong>Library</strong> afin de sauvegarder
+                  des objets de la classe <strong>Book</strong>. Pour
+                  ce faire, nous utilisons à
+                  nouveau <strong>ArrayList</strong>. De plus, on
+                  souhaite trier les éléments de la liste à l'aide
+                  d'un objet <strong>Comparator</strong>. Vous devez
+                  trier les éléments de la liste d'abord par auteur,
+                  ensuite par titre, et finalement selon l'année de
+                  publication (bien sûr, dans une application
+                  complète, il y aurait plusieurs comparateurs).
+                </p>
+
+                <p>
+                  La classe <strong>Library</strong> a les
+                  caractéristiques suivantes:
+                </p>
+                <ul>
+                  <li>
+                    <strong>void addBook(Book b)</strong>: ajoute un
+                    livre à la bibliothèque (ajout d'un objet de la
+                    classe <strong>Book</strong> à l'aide de la
+                    méthode <strong>addBook</strong> de l'objet de la
+                    classe <strong>Library</strong>);
+                  </li>
+                  <li>
+                    <strong>void sort()</strong>: trie les éléments
+                    à l'aide d'un objet <strong>Comparator</strong>;
+                  </li>
+                  <li>
+                    <strong>void printLibrary()</strong>: affiche tous
+                    les livres dans l'ordre actuel de la liste.
+                  </li>
+                </ul>
+
+                <div id="question1.2">
+
+                  <h5>Question 1.2:</h5>
+
+                  <p>
+                    Vous devez compléter l'implémentation de la
+                    classe <strong>Library</strong> ainsi
+                    que <strong>BookComparator</strong>. Utilisez les gabarits fourni pour
+                     <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab5_template/Library.java">
+                      Library</a> et <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab5_template/BookComparator.java">
+                       BookComparator</a> comme point de
+                    départ.
+                  </p>
+
+                </div>
+
+	      </div>
+	    </div>
+	  </div>
+
+          <!-- 2nd part -->
+
+	  <div class="bb-item" id="item2">
+	    <div class="content">
+	      <div class="scroller">
+
+                <h1>Deuxième partie</h1>
+
+		<div class="content_bullet_box objectifs_box">
+
+                  <h3>Objectifs d'apprentissage</h3>
+
+                  <ul>
+ 	            <li><strong>Déclarer</strong> et <strong>implémenter</strong> une interface</li>
+                    <li><strong>Créer</strong> classe abstraite</li>
+                    <li><strong>Mieux comprendre</strong> l'héritage en Java</li>
+                  </ul>
+
+                </div>
+
+                <h2>Classes abstraites et interfaces</h2>
+
+                <p>
+                  En mathématique, une série est une séquence infinie de termes qui sont
+                  additionnés les uns aux autres. La <strong>somme partielle d'une
+                  série</strong>, \(S_n\), est la somme des \(n\) premiers termes.
+                  $$ S_n = \sum_{i=1}^{n} a_i $$
+
+                  Vous devez concevoir une hiérarchie de classes, conforme au
+                  diagramme UML ci-bas, de sorte que toutes les séries possèdent une
+                  méthode <strong>next</strong>, qui retourne la prochaine valeur \(S_n\). Le
+                  premier appel à la méthode <strong>next</strong> retournera \(S_1\), soit
+
+                  $$ a_1 $$
+
+                  le prochain appel à la méthode <strong>next</strong> retournera \(S_2\), soit
+
+                  $$ a_1 + a_2 $$
+
+                  le prochain appel à la méthode <strong>next</strong> retournera \(S_3\), soit
+
+                  $$ a_1 + a_2 + a_3 $$
+
+                  et ainsi de suite. L'implémentation de la méthode <strong>next</strong> dépend
+                  du type de série, <strong>Arithmetic</strong> ou <strong>Geometric</strong> pour
+                  cette question. Cette hiérarchie comprend l'interface <strong>Series</strong>,
+                  une classe abstraite nommée <strong>AbstractSeries</strong>, ainsi que deux
+                  implémentations concrètes, <strong>Arithmetic</strong> et <strong>Geometric</strong>.
+                </p>
+                <p>
+                  <img src="images/uml_series-720.png" style="width:306px;height:143px;" alt="UML diagram of AbstractSeries, Series, Arithmetic, and Geometric. Series is an interface. It declares a public method called next that has no parameter and it returns a value of type double. AbstractSeries is an abstract class. It implements the interface series. It declares a public method called take that takes a parameter of type n and the return type is array of double. Arithmetic and Geometric are subclasses of AbstractSeries."/>
+                </p>
+                <p>
+                  Voici un programme test pour illustrer le résultat attendu pour:
+                  <ul>
+                    <li>une class pour la somme partielle de l'Arithmetic série avec 1 comme le premier élément and le raison 1;</li>
+                    <li>une class pour la somme partielle de la Geometric série avec 1 comme le premier élément and le raison 0.5.</li>
+                  </ul>
+                </p>
+
+                <pre class="prettyprint lang-java">
+                  <code>
+public class TestSeries {
+
+    public static void main(String[] args) {
+
+        AbstractSeries sn;
+        double[] tuple;
+
+        sn = new Arithmetic();
+
+        System.out.println("The first five terms of the arithmetic series are:");
+
+        for (int n=0; n&lt;5; n++) {
+            System.out.println(sn.next());
+        }
+
+        sn = new Geometric();
+
+        System.out.println();
+        System.out.println("The first five terms of the geometric series are:");
+
+        tuple = sn.take(5);
+
+        for (int n=0; n&lt;5; n++) {
+            System.out.println(tuple[n]);
+        }
+
+    }
+}</code>
+                           </pre>
+                <p>
+                  Here is the expected output:
+                </p>
+
+                <pre>
+&gt; TestSeries.java
+&gt; java TestSeries
+The first five terms of the arithmetic series are:
+1.0
+3.0
+6.0
+10.0
+15.0
+
+The first five terms of the geometric series are:
+1.0
+1.5
+1.75
+1.875
+1.9375
+&gt;
+                </pre>
+
+                <p>
+                  La première boucle affichera les valeurs 1.0, 3.0,
+                  6.0, 10.0, 15.0, alors que la deuxième affichera,
+                  1.0, 1.5, 1.75, 1.875, 1.9375.
+                </p>
+
+                <div id="question2.1">
+
+                  <h5>Question 2.1: Series</h5>
+
+                  <p>
+
+                    Vous devez concevoir une interface nommée <strong>Series</strong>. Elle
+                    doit déclarer une méthode nommée <strong>next</strong> dont le type de
+                    la valeur de retour est <strong>double</strong>.
+                  </p>
+                  <p>
+                    Utilisez le <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab5_template/Series.java">
+                      gabarit fourni</a> comme point de départ.
+                  </p>
+                </div>
+
+                <div id="question2.2">
+
+                  <h5>Question 2.2: AbstractSeries</h5>
+
+                  <p>
+                    Donnez l'implémentation d'une classe abstraite
+                    nommée <strong>AbstractSeries</strong>. Elle doit réaliser
+                    l'interface <strong>Series</strong>. La classe implémente
+                    la méthode <strong>take</strong> qui retourne un tableau
+                    contenant les prochaines <strong>k</strong> sommes
+                    partielles de cette série, où <strong>k</strong> est le
+                    paramètre formel de la méthode <strong>take</strong>.
+                  </p>
+                  <p>
+                    Utilisez le <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab5_template/AbstractSeries.java">gabarit
+                      fourni</a> comme point de départ.
+                  </p>
+                </div>
+
+                <div id="question2.3">
+
+                  <h5>Question 2.3: Arithmetic</h5>
+
+                  <p>
+                    Donnez l'implémentation de la classe <strong>Arithmetic</strong>. Elle
+                    doit être une sous-classe de la classe <strong>AbstractSeries</strong>. Pour
+                    cette implémentation, le premier appel à la méthode <strong>next</strong> retournera
+                    la valeur 1.0, le second appel retournera la valeur 3.0, le
+                    troisième appel retournera la valeur 6.0, le quatrième appel
+                    retournera la valeur 10.0, et ainsi de suite. De façon générale, le
+                    \(i\)ème appel de la méthode retournera \(S_{i-1} + i\), pour \(i \in 1, 2,
+                    3\ldots\) et \(S_{i-1}\) est la valeur de l'appel précédent de la
+                    méthode <strong>next</strong>.
+
+                    $$ S_n = \sum_{i=1}^{n} i $$
+
+                  </p>
+                  <p>
+                    Voici les 5 premières sommes partielles de la
+                    série arithmétique:
+
+                    $$S_1 = 1$$
+
+                    $$S_2 = 1 + 2 = 3$$
+
+                    $$S_3 = 1 + 2 + 3 = 6$$
+
+                    $$S_4 = 1 + 2 + 3 + 4 = 10$$
+
+                    $$S_5 = 1 + 2 + 3 + 4 + 5 = 15$$
+                  </p>
+
+                  <p>
+                    Utilisez
+                      le <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab5_template/Arithmetic.java">gabarit
+                      fourni</a> comme point de départ.
+                  </p>
+
+                </div>
+
+                <div id="question2.4">
+
+                  <h5>2.3 Geometric</h5>
+
+                  <p>
+
+                    Vous devez implémenter la classe <strong>Geometric</strong>. Cette
+                    classe est une sous-classe de <strong>AbstractSeries</strong>. Chaque appel
+                    de la méthode <strong>next</strong> produit la prochaine somme partielle de
+                    cette série selon l'équation ci-bas. Le premier appel produira la
+                    valeur 1.0, le second appel produira la valeur 1.5, le troisième
+                    appel produira la valeur 1.75, etc. Vous pouvez utiliser la méthode
+                    <strong>Math.pow( a, b )</strong>, qui retourne \(a^b\), pour vos calculs.
+
+                    $$ S_n = \sum_{i=0}^{n} \frac{1}{2^i}$$
+                  </p>
+
+                  <p>
+                    Voici les 5 premières sommes de la série géométrique:
+
+                    $$ S_1 = 1 $$
+
+                    $$ S_2 = 1 + \frac{1}{2} = 1.5 $$
+
+                    $$ S_3 = 1 + \frac{1}{2} + \frac{1}{4} = 1.75 $$
+
+                    $$ S_4 = 1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} = 1.875 $$
+
+                    $$ S_5 = 1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \frac{1}{16} = 1.9375 $$
+
+                    Chaque appel à la méthode <strong>next</strong> produit
+                    la prochaine somme partielle, c'est-à-dire la
+                    prochaine valeur de \( S_n \).
+                  </p>
+
+                  <p>
+                    Utilisez
+                    le <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab5_template/Geometric.java">gabarit fourni</a>
+                    comme point de départ
+                  </p>
+
+                </div>
+
+	      </div>
+
+	    </div>
+	  </div>
+
+          <!-- 3rd part -->
+
+          <div class="bb-item" id="item3">
+            <div class="content">
+              <div class="scroller">
+
+		<h1>Troisième partie</h1>
+
+		<h2>Créer et soumettre un fichier zip (1 point)</h2>
+
+		<h3>Directives</h3>
+
+		<ul>
+		  <li>
+                    Créez un répertoire que vous
+                    nommerez <strong>lab5_123456</strong>,
+                    où vous remplacerez 123456 par votre numéro
+                    d'étudiant. Notez que le nom du répertoire est en
+                    minuscules, incluant la lettre «l».
+                  </li>
+		  <li>
+                    Dans ce répertoire, placer les fichiers pour les
+                    exercices du laboratoire. N'y ajoutez que le code
+                    source, les fichiers .java. En particulier, ne
+                    soumettez pas les fichiers .class.
+                  </li>
+		  <li>
+                    Dans ce répertoire, créez aussi un fichier texte
+                    nommé <strong>README.txt</strong>, qui devra
+                    contenir votre nom, numéro d'étudiant, ainsi
+                    qu'une brève description du contenu (en français
+                    ou en anglais, c'est votre choix) :
+		    <pre>
+
+Nom de l'étudiante ou de l'étudiant: Paidge Beaulieu
+Numéro d'étudiant: 123456
+Code du cours: ITI1121
+Section de laboratoire: A02
+
+Cette archive contient les 8 fichiers du laboratoire 5.
+
+Spécifiquement, ce fichier (README.txt), ainsi que
+AbstractSeries.java, Arithmetic.java, Book.java, BookComparator.java, Geometric.java,
+Library.java, Series.java.
+
+                    </pre>
+		  </li>
+		  <li>
+                    Créez un fichier zip <strong>
+                    lab5_123456.zip</strong> à partir du répertoire <strong>lab5_123456</strong>.
+                  </li>
+		  <li>
+                    Assurez-vous que cette archive comprend tous les
+                    fichiers nécessaires. Pour ce faire, copiez le
+                    fichier zip quelque part, ouvrez-le et
+                    assurez-vous que les fichiers et les répertoires
+                    espérés s'y trouvent.
+                  </li>
+		  <li>
+                    Soumettez l'archive sur le site Web <a href="https://uottawa.brightspace.com/">https://uottawa.brightspace.com/</a>.
+                  </li>
+		</ul>
+<h4>Remarques importantes!</h4>
+Nous utilisons des scripts automatisés pour tester et évaluer votre soumission de laboratoire. Par conséquent, vous devez suivre ces instructions à la lettre. En particulier:
+<ul>
+<li>Les noms de tous les fichiers et méthodes doivent être exacts. Utilisez le code de démarrage fourni pour éviter des problèmes.</li>
+<li>Il faut soumettre un fichier .zip; pas de fichiers individuels; pas un .rar, pas un .7z, ni rien d’autre. </li>
+<li>Tous les fichiers de java doivent être présents et compiler avec succès (autrement dit, l’exécution de javac *.java ne doit générer aucune erreur), même si vous n’êtes pas capable de compléter un exercice. </li>
+<li>Notez si le code ne sera pas compilé en raison d'erreurs de syntaxe, vous n'obtiendrez pas de marque. Même si vous ne pouvez pas à résoudre complètement cet exercice, vous devez déposer un fichier contenant les méthodes intactes qui compilent correctement (vous pouvez mettre "return 0" si vous avez abandonné). </li>
+<li>Votre travail doit être soumis au plus tard à 23h30
+  le mardi de la semaine prochaine.</li>
+</ul>
+<h4>JUnits</h4>
+
+Pour vous assurer que votre code est correct, nous avons préparé quelques <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab5_template/JUnit05.zip">tests unitaires</a>. Consultez le fichier Readme.txt dans le fichier zip pour obtenir des informations supplémentaires.
+
+                <h4>Resources</h4>
+                <ul>
+                  <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/application/index.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/application/index.html</a></li>
+                  <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html</a></li>
+                  <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/cupojava/unix.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/cupojava/unix.html</a></li>
+                  <li><a href="https://docs.oracle.com/javase/tutorial/getStarted/problems/index.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/problems/index.html</a></li>
+                </ul>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <nav>
+          <span id="bb-nav-prev">&larr;</span>
+          <span id="bb-nav-next">&rarr;</span>
+        </nav>
+
+        <span id="tblcontents" class="menu-button">Table of Contents</span>
+
+      </div>
+
+    </div><!-- /container -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="js/jquery.mousewheel.js"></script>
+    <script src="js/jquery.jscrollpane.min.js"></script>
+    <script src="js/jquerypp.custom.js"></script>
+    <script src="js/jquery.bookblock.js"></script>
+    <script src="js/page.js"></script>
+    <script>
+      $(function() {
+          Page.init();
+      });
+    </script>
+  </body>
+</html>

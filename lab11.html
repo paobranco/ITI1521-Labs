@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>ITI1521 Laboratoire 11</title>
+		<meta name="description" content="ITI1521 labs" />
+		<meta name="keywords" content="fullscreen pageflip, booklet, layout, bookblock, jquery plugin, flipboard layout, sidebar menu" />
+		<link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.custom.css" />
+		<link rel="stylesheet" type="text/css" href="css/bookblock.css" />
+		<link rel="stylesheet" type="text/css" href="css/custom.css" />
+		<script src="js/modernizr.custom.79639.js"></script>
+		<script type="text/javascript" src="js/google-code-prettify/src/run_prettify.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/prettify.css"/>
+
+
+	</head>
+	<body>
+		<div id="container" class="container">
+
+			<div class="menu-panel">
+				<h3>Table des matières</h3>
+				<ul id="menu-toc" class="menu-toc">
+					<li class="menu-toc-current"><a href="#item1">Partie 1</a></li>
+					<li><a href="#item2">Partie 2</a></li>
+					<li><a href="#item3">Partie 3</a></li>
+					<li><a href="#item4">Partie 4</a></li>
+				</ul>
+				<!--<div>
+					<a href="">some link here</a>
+
+				</div>-->
+			</div>
+
+			<div class="bb-custom-wrapper">
+				<div id="bb-bookblock" class="bb-bookblock">
+
+<!------------------------1st part ------------------------------------>
+
+					<div class="bb-item" id="item1">
+						<div class="content">
+							<div class="scroller"> <h1>Première partie</h1>
+							  <div class="content_bullet_box objectifs_box">
+<h3>Objectifs d'apprentissage</h3>
+
+<ul>
+			   <li><strong>Comprendre</strong> le principe d'itérateur.</li>
+          <li><strong>Expliquer</strong> le concept d&rsquo;itérateur dans vos propres mots.</li>
+          <li><strong>Résoudre</strong> des problèmes exigeant l&rsquo;utilisation d&rsquo;itérateurs.</li>
+</ul>
+</div>
+
+<h2>Itérateurs</h2>
+<p>Pour ce laboratoire, vous utiliserez une liste chaînée afin de sauvegarder un nombre illimité de bits : des zéros et  des uns. Contrairement aux implémentations vues jusqu&rsquo;ici, les valeurs à l&rsquo;intérieur des noeuds sont des entiers  (int). </p>
+<p>La classe <b>BitList</b> possède une <b>classe interne</b>. Il s'agit en fait d'une seconde définition de classe dont la visibilité est <b>private</b> se trouvant dans le même fichier de définition de la classe <b>public BitList</b>. Cette classe interne (<i>inner</i> en anglais) est <b>BitListIterator</b>.</p>
+
+<p><b>BitListIterator</b> réalise l'interface <b>Iterator</b> qui oblige l'implémentation de 3 méthodes, soit <b>hasNext</b>, <b>next</b> et <b>add</b>.</p>
+<p>Prenez le temps de bien comprendre le comportement de chacune des méthodes et leur implémentation.</p>
+
+<ul>
+  <li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab11_template/Iterator.java" target="_blank">Iterator.java</a></li>
+	<li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab11_template/BitList.java" target="_blank">BitList.java</a></li>
+	<li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab11_template/BitListMain.java" target="_blank">BitListMain.java</a></li>
+</ul>
+
+<h2>BitList</h2>
+<p>Puisque plusieurs opérations sur les bits nécessitent un traitement de droite à gauche, l&rsquo;implémentation doit sauvegarder les bits dans l&rsquo;ordre «droite à gauche», c.-à-d. le bit le plus à droite dans le mot binaire sera en en première position dans la liste (premier  noeud). </p>
+<p> Par exemple, les bits «11010» doivent être sauvegardés dans une liste telle que le premier noeud contienne 0, le  second 1, suivi d&rsquo;un 0, puis 1, et 1 : </p>
+<ul class="java" style="list-style:none;"><li> -&gt; 0 -&gt; 1 -&gt; 0 -&gt; 1 -&gt; 1 </li></ul>
+<h4>1. Complétez l&rsquo;implémentation de la classe BitList. </h4>
+  <h5><strong>public BitList( String s )</strong> </h5>
+	<p>Ce constructeur doit créer une liste représentant la chaîne de 0s et 1s donnée en entrée.</p>
+	<p>La   chaîne <b>s</b> doit contenir que des 0s et des 1s sinon il faudra lancer l'exception <strong>IllegalArgumentException</strong>. </p>
+    <p>Le constructeur initialise cette nouvelle liste de bits afin de représenter la valeur de la chaîne. Chaque       caractère de la chaîne représente un bit de la liste. </p>
+    <p>Par exemple, étant donné la chaîne «1010111», le constructeur doit initialiser cette liste afin d&rsquo;y inclure les bits suivants (portez attention à l'ordre des bits encore une fois!). </p>
+<ul class="java" style="list-style:none;"><li> -&gt; 1 -&gt; 1 -&gt; 1 -&gt; 0 -&gt; 1 -&gt; 0 -&gt; 1 </li></ul>
+    <p> Si la chaîne est vide, le constructeur doit créer une liste vide — la valeur null n&rsquo;est pas valide. </p>
+    <p>Le constructeur ne doit pas retirer les zéros de la partie gauche. Par exemple, étant donné «0001» le       constructeur doit initialiser cette liste comme suit. </p>
+<ul class="java" style="list-style:none;"><li> -&gt; 1 -&gt; 0 -&gt; 0 -&gt; 0 </li></ul>
+
+
+
+<p>&nbsp;</p>
+
+						</div>
+					</div>
+					</div>
+
+
+ <!------------------------2nd part ------------------------------------>
+
+
+					<div class="bb-item" id="item2">
+						<div class="content">
+						<div class="scroller">
+<h1>Deuxième partie</h1>
+<h2>Iterative</h2>
+<p>Créez une classe nommée Iterative. Implémentez les méthodes ci-bas dans cette classe. Vos solutions doivent être  itératives (c.-à-d. utilise des itérateurs). </p>
+
+<p>Fichiers:</p>
+<ul>
+  <li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab11_template/Iterative.java" target="_blank">Iterative.java</a></li>
+	<li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab11_template/IterativeMain.java" target="_blank">IterativeMain.java</a></li>
+</ul>
+
+<h4>2.1 static BitList complement(BitList in)</h4>
+<p>Créez une méthode «static» itérative retournant une nouvelle liste de bits (BitList) qui soit le complément de celle  en entrée. Le complément de 0 est 1 ; et vice-versa. Le complément d&rsquo;une liste de bits est une nouvelle liste, de  même longueur que l&rsquo;entrée, telle que chaque bit est le complément du bit à la même position dans la liste d&rsquo;entrée.  Voici 4 exemples. </p>
+<div class="java"> 1011   <br>
+ 0100   <br>
+  <br>
+  0   <br>
+ 1   <br>
+  <br>
+01   <br>
+  10   <br>
+  <br>
+  0000111   <br>
+  1111000 </div>
+
+<h4>2.2 static BitList or(BitList a, BitList b)</h4>
+<p>Vous devez écrire une méthode de classe retournant le <strong>ou</strong> («or») des deux listes passées en paramètre. Cette liste a  la même longueur que les listes en entrée et chacun des bits de cette liste est le ou («or») des bits à cette position  dans les listes en entrée. La méthode lance une exception, <strong>IllegalArgumentException</strong>, si l&rsquo;une ou l&rsquo;autre des  deux listes est vide ou si les listes sont de longueur différente. </p>
+<p>Lorsque l’on compare deux bits avec le <strong>ou</strong>, le résultat est 1 si au moins l’un des bit est un 1, 0 si les deux bits sont des 0.</p>
+<div class="java"> a = 10001   <br>
+  b = 00011   <br>
+  a or b = 10011 </div>
+
+  <h4>2.3 <strong>et</strong> et <strong>ou exclusif</strong></h4>
+  <p>Créer les méthodes <strong>static BitList and(BitList a, BitList b)</strong> et <strong>static BitList xor(BitList a, BitList b)</strong>. Ces méthodes sont similaires à la méthode <strong>or</strong> mais il implémente respectivement le <strong>et</strong> binaire ainsi que le <strong>ou exclusif</strong> (xor).</p>
+
+<p>Avec le <strong>et</strong> binaire, le résultat d’une comparaison est 1 si les deux bits sont 1, sinon le résultat est 0.</p>
+<div class="java"> a = 10001   <br>
+  b = 00011   <br>
+  a and b = 00001 </div>
+
+<p>Avec le <strong>ou exclusif</strong> binaire, le résultat d’une comparaison est 1 si et seulement si l’un des deux bits est 1. Donc si les deux bits sont 0 ou 1, le résultat sera 0.</p>
+<div class="java"> a = 10001   <br>
+  b = 00011   <br>
+  a xor b = 10010 </div>
+
+<p>&nbsp;</p>
+						</div>
+					</div>
+
+				</div>
+
+    <!------------------------3rd part ------------------------------------>
+		<div class="bb-item" id="item3">
+						<div class="content">
+						  <div class="scroller"> <h1>Troisième partie (optionnelle)</h1>
+						    <div class="content_bullet_box objectifs_box">
+	<h3>Objectifs d'apprentissage</h3>
+
+<ul>
+                <li><b>Concevoir</b> une méthode itérative pour un arbre binaire de recherche.</li>
+                <li><b>Écrire</b> une méthode récursive pour un arbre binaire de recherche.</li>
+</ul>
+</div>
+<p>Cette partie est optionnelle et ne doit pas être remise. Cependant, nous vous le recommandons fortement, car il s'agit d'une excellente pratique pour l'examen final.</p>
+<p>Pour cette partie du laboratoire, vous devez utiliser la classe <strong>BinarySearchTree</strong>. 
+
+<h6>Fichiers</h6>
+<ul>
+	<li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab11_template/BinarySearchTree.java" target="_blank">BinarySearchTree.java</a></li>
+	<li><a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab11_template/BinarySearchTreeTest.java" target="_blank">BinarySearchTreeTest.java</a></li>
+</ul>
+
+<p>Vous devez implémenter les méthodes qui suivent.</p>
+<h4>1. E max()</h4>
+<p>Retourne la plus grande valeur de cet arbre. Lance l&rsquo;exception <strong>NoSuchElementException</strong> si l&rsquo;arbre est  vide. </p>
+
+<p>Par exemple, si vous déclarez BinarySearchTree t, et ajoute un animal "Lion" à l'arbre</p>
+
+<pre class="prettyprint lang-java"><code>BinarySearchTree<String> t;
+t = new BinarySearchTree<String>();
+t.add( "Lion" );</code></pre>
+
+<p>et appelez <b>t.max()</b>, cela devrait retourner <b>"Lion"</b>.</p>
+
+<h4>2. E min()</h4>
+<p>Retourne la plus petite valeur de cet arbre. Lance l&rsquo;exception NoSuchElementException si l&rsquo;arbre est  vide. </p>
+
+<p>Par exemple, si vous appelez <b>t.min()</b> sur la base de l'exemple ci-dessus, cela devrait retourner <b>"Lion"</b>.</p>
+
+<h4>3. int depth()</h4>
+<p>Retourne la profondeur de l&rsquo;arbre, c&rsquo;est-à-dire la profondeur du noeud le plus profond. </p>
+
+<p>Par exemple, si vous appelez <b>t.depth()</b> sur la base de l'exemple ci-dessus, cela devrait retourner <b>0</b>.</p>
+
+<h4>4. boolean isTwoTree()</h4>
+<p>Un arbre binaire est un two-tree s&rsquo;il est vide ou si tous ses noeuds internes ont deux fils. </p>
+
+<p>Par exemple, si vous appelez <b>t.isTwoTree()</b> sur la base de l'exemple ci-dessus, cela devrait retourner <b>true</b>.</p>
+<br></br>
+
+<h2>&nbsp;</h2>
+</div>
+						</div>
+					</div>
+	<!------------------------4th part ------------------------------------>
+
+	<div class="bb-item" id="item4">
+		<div class="content">
+			<div class="scroller">
+
+<h1>Quatrième partie</h1>
+
+<h2>Créer et soumettre un fichier zip (1 point)</h2>
+
+<h3>Directives</h3>
+
+<ul>
+<li>
+						Créez un répertoire que vous
+						nommerez <strong>lab11_123456</strong>,
+						où vous remplacerez 123456 par votre numéro
+						d'étudiant. Notez que le nom du répertoire est en
+						minuscules, incluant la lettre «l».
+					</li>
+<li>
+						Dans ce répertoire, placer les fichiers pour les
+						exercices du laboratoire. N'y ajoutez que le code
+						source, les fichiers .java. En particulier, ne
+						soumettez pas les fichiers .class.
+					</li>
+<li>
+						Dans ce répertoire, créez aussi un fichier texte
+						nommé <strong>README.txt</strong>, qui devra
+						contenir votre nom, numéro d'étudiant, ainsi
+						qu'une brève description du contenu (en français
+						ou en anglais, c'est votre choix) :
+<pre>
+
+Nom de l'étudiante ou de l'étudiant: Paidge Beaulieu
+Numéro d'étudiant: 123456
+Code du cours: ITI1521
+Section de laboratoire: A02
+
+Cette archive contient les 4 fichiers du laboratoire 11.
+
+Spécifiquement, ce fichier (README.txt), ainsi que
+Iterator.java, BitList.java, Iterative.java.
+
+						</pre>
+</li>
+<li>
+						Créez un fichier zip <strong>
+						lab11_123456.zip</strong> à partir du répertoire <strong>lab11_123456</strong>.
+					</li>
+<li>
+						Assurez-vous que cette archive comprend tous les
+						fichiers nécessaires. Pour ce faire, copiez le
+						fichier zip quelque part, ouvrez-le et
+						assurez-vous que les fichiers et les répertoires
+						espérés s'y trouvent.
+					</li>
+<li>
+						Soumettez l'archive sur le site Web <a href="https://uottawa.brightspace.com/">https://uottawa.brightspace.com/</a>.
+					</li>
+</ul>
+<h4>Remarques importantes!</h4>
+Nous utilisons des scripts automatisés pour tester et évaluer votre soumission de laboratoire. Par conséquent, vous devez suivre ces instructions à la lettre. En particulier:
+<ul>
+<li>Les noms de tous les fichiers et méthodes doivent être exacts. Utilisez le code de démarrage fourni pour éviter des problèmes.</li>
+<li>Il faut soumettre un fichier .zip; pas de fichiers individuels; pas un .rar, pas un .7z, ni rien d’autre. </li>
+<li>Tous les fichiers de java doivent être présents et compiler avec succès (autrement dit, l’exécution de javac *.java ne doit générer aucune erreur), même si vous n’êtes pas capable de compléter un exercice. </li>
+<li>Notez si le code ne sera pas compilé en raison d'erreurs de syntaxe, vous n'obtiendrez pas de marque. Même si vous ne pouvez pas à résoudre complètement cet exercice, vous devez déposer un fichier contenant les méthodes intactes qui compilent correctement (vous pouvez mettre "return 0" si vous avez abandonné). </li>
+<li>Votre travail doit être soumis au plus tard à 23h30
+  le mardi de la semaine prochaine.</li>
+</ul>
+<h4>JUnits</h4>
+
+Pour vous assurer que votre code est correct, nous avons préparé quelques <a href="https://www.site.uottawa.ca/~gvj/Courses/ITI1121/lectures/labs/lab11_template/JUnit11.zip">tests unitaires</a>.
+
+				<h4>Resources</h4>
+				<ul>
+					<li><a href="https://docs.oracle.com/javase/tutorial/getStarted/application/index.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/application/index.html</a></li>
+					<li><a href="https://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html</a></li>
+					<li><a href="https://docs.oracle.com/javase/tutorial/getStarted/cupojava/unix.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/cupojava/unix.html</a></li>
+					<li><a href="https://docs.oracle.com/javase/tutorial/getStarted/problems/index.html" target="_blank">https://docs.oracle.com/javase/tutorial/getStarted/problems/index.html</a></li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+
+				<nav>
+					<span id="bb-nav-prev">&larr;</span>
+					<span id="bb-nav-next">&rarr;</span>
+				</nav>
+
+				<span id="tblcontents" class="menu-button">Table of Contents</span>
+
+			</div>
+
+		</div><!-- /container -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script src="js/jquery.mousewheel.js"></script>
+		<script src="js/jquery.jscrollpane.min.js"></script>
+		<script src="js/jquerypp.custom.js"></script>
+		<script src="js/jquery.bookblock.js"></script>
+		<script src="js/page.js"></script>
+		<script>
+			$(function() {
+
+				Page.init();
+
+			});
+		</script>
+	</body>
+</html>
